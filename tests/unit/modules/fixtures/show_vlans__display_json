@@ -1,0 +1,127 @@
+{
+    "l2ng-l2ald-vlan-instance-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/23.4I0/junos-l2al",
+                        "junos:style" : "brief"
+                       },
+        "l2ng-l2ald-vlan-instance-group" : [
+        {
+            "l2ng-l2rtb-brief-summary" : [
+            {
+                "data" : [null]
+            }
+            ],
+            "l2ng-l2rtb-name" : [
+            {
+                "data" : "default-switch"
+            }
+            ],
+            "l2ng-l2rtb-vlan-name" : [
+            {
+                "data" : "default"
+            }
+            ],
+            "l2ng-l2rtb-vlan-tag" : [
+            {
+                "data" : "1"
+            }
+            ],
+            "l2ng-l2rtb-vlan-member" : [
+            {
+                "l2ng-l2rtb-vlan-member-interface" : [
+                {
+                    "data" : [null]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "l2ng-l2rtb-name" : [
+            {
+                "data" : "default-switch"
+            }
+            ],
+            "l2ng-l2rtb-vlan-name" : [
+            {
+                "data" : "mc-lag-vrrp-ae11"
+            }
+            ],
+            "l2ng-l2rtb-vlan-tag" : [
+            {
+                "data" : "3045"
+            }
+            ],
+            "l2ng-l2rtb-vlan-member" : [
+            {
+                "l2ng-l2rtb-vlan-member-interface" : [
+                {
+                    "data" : [null]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "l2ng-l2rtb-name" : [
+            {
+                "data" : "default-switch"
+            }
+            ],
+            "l2ng-l2rtb-vlan-name" : [
+            {
+                "data" : "mghpcc-atlas-mgmt-1"
+            }
+            ],
+            "l2ng-l2rtb-vlan-tag" : [
+            {
+                "data" : "58"
+            }
+            ],
+            "l2ng-l2rtb-vlan-member" : [
+            {
+                "l2ng-l2rtb-vlan-member-interface" : [
+                {
+                    "data" : "et-0/0/34.0*"
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "l2ng-l2rtb-name" : [
+            {
+                "data" : "default-switch"
+            }
+            ],
+            "l2ng-l2rtb-vlan-name" : [
+            {
+                "data" : "net2-test"
+            }
+            ],
+            "l2ng-l2rtb-vlan-tag" : [
+            {
+                "data" : "3038"
+            }
+            ],
+            "l2ng-l2rtb-vlan-member" : [
+            {
+                "l2ng-l2rtb-vlan-member-interface" : [
+                {
+                    "data" : "ae1.0"
+                }
+                ]
+            },
+            {
+                "l2ng-l2rtb-vlan-member-interface" : [
+                {
+                    "data" : "et-0/0/34.0*"
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}

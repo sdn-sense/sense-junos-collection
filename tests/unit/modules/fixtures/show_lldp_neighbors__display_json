@@ -1,0 +1,105 @@
+{
+    "lldp-neighbors-information" : [
+    {
+        "attributes" : {"junos:style" : "brief"},
+        "lldp-neighbor-information" : [
+        {
+            "lldp-local-port-id" : [
+            {
+                "data" : "et-0/0/16"
+            }
+            ],
+            "lldp-local-parent-interface-name" : [
+            {
+                "data" : "-"
+            }
+            ],
+            "lldp-remote-chassis-id-subtype" : [
+            {
+                "data" : "Mac address"
+            }
+            ],
+            "lldp-remote-chassis-id" : [
+            {
+                "data" : "3c:08:cd:8b:46:fe"
+            }
+            ],
+            "lldp-remote-port-description" : [
+            {
+                "data" : "mc-lag ICCP"
+            }
+            ],
+            "lldp-remote-system-name" : [
+            {
+                "data" : "atlas-rt-1-1"
+            }
+            ]
+        },
+        {
+            "lldp-local-port-id" : [
+            {
+                "data" : "et-0/0/34"
+            }
+            ],
+            "lldp-local-parent-interface-name" : [
+            {
+                "data" : "-"
+            }
+            ],
+            "lldp-remote-chassis-id-subtype" : [
+            {
+                "data" : "Mac address"
+            }
+            ],
+            "lldp-remote-chassis-id" : [
+            {
+                "data" : "3c:08:cd:8b:46:fe"
+            }
+            ],
+            "lldp-remote-port-description" : [
+            {
+                "data" : "400g test"
+            }
+            ],
+            "lldp-remote-system-name" : [
+            {
+                "data" : "atlas-rt-1-1"
+            }
+            ]
+        },
+        {
+            "lldp-local-port-id" : [
+            {
+                "data" : "et-0/0/28"
+            }
+            ],
+            "lldp-local-parent-interface-name" : [
+            {
+                "data" : "-"
+            }
+            ],
+            "lldp-remote-chassis-id-subtype" : [
+            {
+                "data" : "Mac address"
+            }
+            ],
+            "lldp-remote-chassis-id" : [
+            {
+                "data" : "3c:94:d5:0f:3f:c0"
+            }
+            ],
+            "lldp-remote-port-description" : [
+            {
+                "data" : "atlas-rt-1-2"
+            }
+            ],
+            "lldp-remote-system-name" : [
+            {
+                "data" : "mghpcc1-rt.gw.umass.edu"
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}

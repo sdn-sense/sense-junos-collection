@@ -1,0 +1,1751 @@
+{
+    "configuration" : {
+        "@" : {
+            "junos:commit-seconds" : "1736180842",
+            "junos:commit-localtime" : "2025-01-06 16:27:22 UTC",
+            "junos:commit-user" : "jbalcas"
+        },
+        "version" : "23.4R1.10-EVO",
+        "system" : {
+            "host-name" : "atlas-rt-1-2",
+            "root-authentication" : {
+                "encrypted-password" : "$6$wwm0D1Nr$x3eNqT9Mpms/"
+            },
+            "commit" : {
+                "synchronize" : [null]
+            },
+            "login" : {
+                "class" : [
+                {
+                    "name" : "hw-installer",
+                    "login-alarms" : [null],
+                    "permissions" : ["network", "view"],
+                    "allow-commands" : "(request system power-off)"
+                }
+                ],
+                "user" : [
+                {
+                    "name" : "bach",
+                    "uid" : 2004,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "ssh-rsa" : [
+                        {
+                            "name" : "ssh-rsa AAAAB3NzaC1ya4ebP2a7hRmP4/te1W3QeD1XBHgWaas2SizTWw3l/vLjvsOTkGB5JKj4mtVKneeLrIsyUMrKZ8XPqXw/kvlipoeKocYKEB/2rsDT14xT2le8aOPjYE1iBRBa1yEaLSl/3B2AhJDfjBuQ== bach@Noronha"
+                        }
+                        ]
+                    }
+                },
+                {
+                    "name" : "blade",
+                    "uid" : 2001,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "encrypted-password" : "$6$Ls4Yqolt$EwDv0xlh55/1"
+                    }
+                },
+                {
+                    "name" : "duribe",
+                    "uid" : 2007,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "ssh-rsa" : [
+                        {
+                            "name" : "ssh-rsa AAAAB3NzaC1yc/8XQWSUbPbvuXMX"
+                        }
+                        ]
+                    }
+                },
+                {
+                    "name" : "jbalcas",
+                    "uid" : 2008,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "ssh-ed25519" : [
+                        {
+                            "name" : "ssh-ed25519 AAAAC3NzaC9L4P juztas@gmail.com"
+                        },
+                        {
+                            "name" : "ssh-ed25519 AAAAC3NzaC1lZDI1tEVzM jbalcas@es.net"
+                        }
+                        ]
+                    }
+                },
+                {
+                    "name" : "jessicaw",
+                    "uid" : 2005,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "encrypted-password" : "$6$Scv5LePR$bmj4E15MvqRy5kZ0",
+                        "ssh-rsa" : [
+                        {
+                            "name" : "ssh-rsa AAAeGucnuZILy2jdn9kU/59lcY++OaNJj"
+                        },
+                        {
+                            "name" : "ssh-rsa AAAAB3DiGFv1Hjf5ZSf0JbhsUcwW2olteGucnuZILy2jdn9kU/59lcY++OaNJj"
+                        }
+                        ]
+                    }
+                },
+                {
+                    "name" : "nssjrouters",
+                    "uid" : 2000,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "encrypted-password" : "$6$XKeP1I6tbY."
+                    }
+                },
+                {
+                    "name" : "rclsa",
+                    "uid" : 2006,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "ssh-rsa" : [
+                        {
+                            "name" : "ssh-rsa AAAAB3NzaCohI87WeCcNn+LyYlcNFjWRJtpRsR4qxBfHRT0w== rclsa@net.edu"
+                        }
+                        ]
+                    }
+                },
+                {
+                    "name" : "remote",
+                    "full-name" : "NSS Staff",
+                    "uid" : 2002,
+                    "class" : "read-only"
+                },
+                {
+                    "name" : "wleight",
+                    "uid" : 2003,
+                    "class" : "super-user",
+                    "authentication" : {
+                        "ssh-rsa" : [
+                        {
+                            "name" : "ssh-rsa AAAABnIyhFESYR2KzU= wleight@wleightlaptop.dyndns.cern.ch"
+                        }
+                        ]
+                    }
+                }
+                ]
+            },
+            "syslog" : {
+                "archive" : {
+                    "size" : "10m",
+                    "files" : 20
+                },
+                "user" : [
+                {
+                    "name" : "*",
+                    "contents" : [
+                    {
+                        "name" : "any",
+                        "emergency" : [null]
+                    }
+                    ]
+                }
+                ],
+                "file" : [
+                {
+                    "name" : "default-log-messages",
+                    "contents" : [
+                    {
+                        "name" : "any",
+                        "notice" : [null]
+                    }
+                    ],
+                    "structured-data" : {}
+                },
+                {
+                    "name" : "interactive-commands",
+                    "contents" : [
+                    {
+                        "name" : "interactive-commands",
+                        "any" : [null]
+                    }
+                    ]
+                },
+                {
+                    "name" : "messages",
+                    "contents" : [
+                    {
+                        "name" : "any",
+                        "notice" : [null]
+                    },
+                    {
+                        "name" : "authorization",
+                        "info" : [null]
+                    }
+                    ]
+                },
+                {
+                    "name" : "messages_firewall_any",
+                    "contents" : [
+                    {
+                        "name" : "firewall",
+                        "any" : [null]
+                    }
+                    ]
+                }
+                ]
+            },
+            "services" : {
+                "netconf" : {
+                    "ssh" : {}
+                },
+                "ssh" : {
+                    "root-login" : "deny",
+                    "protocol-version" : ["v2"],
+                    "max-sessions-per-connection" : 32
+                }
+            },
+            "domain-search" : ["gw.net.edu", "oit.net.edu"],
+            "authentication-order" : ["password"],
+            "name-server" : [
+            {
+                "name" : "28.119.101.2"
+            },
+            {
+                "name" : "28.119.101.1"
+            }
+            ],
+            "ntp" : {
+                "server" : [
+                {
+                    "name" : "28.119.101.1"
+                }
+                ]
+            }
+        },
+        "chassis" : {
+            "aggregated-devices" : {
+                "ethernet" : {
+                    "device-count" : 20
+                }
+            },
+            "alarm" : {
+                "management-ethernet" : {
+                    "link-down" : "ignore"
+                }
+            }
+        },
+        "interfaces" : {
+            "interface" : [
+            {
+                "name" : "et-0/0/0",
+                "description" : "sonic-vrf test",
+                "speed" : "10g"
+            },
+            {
+                "name" : "et-0/0/1",
+                "unused" : [null]
+            },
+            {
+                "name" : "et-0/0/2",
+                "description" : "mc-lag-test",
+                "speed" : "10g",
+                "ether-options" : {
+                    "ieee-802.3ad" : {
+                        "bundle" : "ae1"
+                    }
+                }
+            },
+            {
+                "name" : "et-0/0/3",
+                "unused" : [null]
+            },
+            {
+                "name" : "et-0/0/4",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/5",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/6",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/7",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/8",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/9",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/10",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/11",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/12",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/13",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/14",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/15",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/16",
+                "description" : "mc-lag ICCP",
+                "flexible-vlan-tagging" : [null],
+                "mtu" : 9216,
+                "encapsulation" : "flexible-ethernet-services",
+                "unit" : [
+                {
+                    "name" : 3045,
+                    "vlan-id" : 3045,
+                    "family" : {
+                        "inet" : {
+                            "address" : [
+                            {
+                                "name" : "105.172.168.79/31"
+                            }
+                            ]
+                        }
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/17",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/18",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/19",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/20",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/21",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/22",
+                "description" : "FABRIC Test Server",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/23",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/24",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/25",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/26",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/27",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/28",
+                "description" : "mghpcc1-rt xe-11/0/0",
+                "flexible-vlan-tagging" : [null],
+                "speed" : "10g",
+                "mtu" : 9126,
+                "encapsulation" : "flexible-ethernet-services",
+                "unit" : [
+                {
+                    "name" : 3040,
+                    "description" : "ibgp p2p",
+                    "vlan-id" : 3040,
+                    "family" : {
+                        "inet" : {
+                            "address" : [
+                            {
+                                "name" : "105.172.168.77/31"
+                            }
+                            ]
+                        },
+                        "inet6" : {
+                            "address" : [
+                            {
+                                "name" : "2001:48a8:6a00:4::2/64"
+                            }
+                            ]
+                        }
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/29",
+                "unused" : [null]
+            },
+            {
+                "name" : "et-0/0/30",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/31",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/32",
+                "description" : "net2-mghpcc-2 waveserver NYC",
+                "flexible-vlan-tagging" : [null],
+                "mtu" : 9216,
+                "encapsulation" : "flexible-ethernet-services",
+                "unit" : [
+                {
+                    "name" : 1138,
+                    "description" : "NOT LHCone ESnet",
+                    "vlan-id" : 1138,
+                    "family" : {
+                        "inet" : {
+                            "address" : [
+                            {
+                                "name" : "98.124.194.45/31"
+                            }
+                            ]
+                        },
+                        "inet6" : {
+                            "address" : [
+                            {
+                                "name" : "2001:f00:a003:9:0:0:0:3/127"
+                            }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name" : 3022,
+                    "description" : "ESnet LHCone",
+                    "vlan-id" : 3022,
+                    "family" : {
+                        "inet" : {
+                            "address" : [
+                            {
+                                "name" : "98.124.81.83/31"
+                            }
+                            ]
+                        },
+                        "inet6" : {
+                            "address" : [
+                            {
+                                "name" : "2001:a00:e002:e8:0:0:0:3/127"
+                            }
+                            ]
+                        }
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/34",
+                "description" : "400g test",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "ethernet-switching" : {
+                            "interface-mode" : "trunk",
+                            "vlan" : {
+                                "members" : ["mghpcc-atlas-mgmt-1", "net2-test"]
+                            }
+                        }
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "et-0/0/35",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {}
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "ae1",
+                "description" : "mc-lag",
+                "mtu" : 9216,
+                "aggregated-ether-options" : {
+                    "link-speed" : "10g",
+                    "lacp" : {
+                        "active" : [null],
+                        "periodic" : "fast",
+                        "system-id" : "00:00:00:00:00:01",
+                        "admin-key" : 1
+                    }
+                },
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "ethernet-switching" : {
+                            "interface-mode" : "trunk",
+                            "vlan" : {
+                                "members" : ["net2-test"]
+                            }
+                        }
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "irb",
+                "unit" : [
+                {
+                    "name" : 58,
+                    "description" : "mghpcc-atlas-mgmt-1",
+                    "family" : {
+                        "inet" : {
+                            "address" : [
+                            {
+                                "name" : "72.20.170.4/23"
+                            }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name" : 3038,
+                    "description" : "net2-test",
+                    "family" : {
+                        "inet" : {
+                            "address" : [
+                            {
+                                "name" : "72.20.177.3/24",
+                                "vrrp-group" : [
+                                {
+                                    "name" : 1,
+                                    "virtual-address" : ["72.20.177.1"],
+                                    "priority" : 101,
+                                    "accept-data" : [null]
+                                }
+                                ]
+                            }
+                            ]
+                        }
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "lo0",
+                "unit" : [
+                {
+                    "name" : 0,
+                    "family" : {
+                        "inet" : {
+                            "filter" : {
+                                "input" : {
+                                    "filter-name" : "control-plane-filter"
+                                }
+                            },
+                            "address" : [
+                            {
+                                "name" : "105.172.168.253/32"
+                            }
+                            ]
+                        },
+                        "inet6" : {
+                            "address" : [
+                            {
+                                "name" : "2001:48a8:6a00:3::1/64"
+                            }
+                            ]
+                        }
+                    }
+                }
+                ]
+            }
+            ]
+        },
+        "multi-chassis" : {
+            "multi-chassis-protection" : [
+            {
+                "name" : "105.172.168.78",
+                "interface" : "et-0/0/16"
+            }
+            ]
+        },
+        "snmp" : {
+            "contact" : "net2-technical@groups.net.edu",
+            "v3" : {
+                "vacm" : {
+                    "security-to-group" : {
+                        "security-model" : [
+                        {
+                            "name" : "usm",
+                            "security-name" : [
+                            {
+                                "name" : "nss",
+                                "group" : "OITNSSRO"
+                            },
+                            {
+                                "name" : "net2snmp",
+                                "group" : "net2noc"
+                            }
+                            ]
+                        }
+                        ]
+                    },
+                    "access" : {
+                        "group" : [
+                        {
+                            "name" : "OITNSSRO",
+                            "default-context-prefix" : {
+                                "security-model" : [
+                                {
+                                    "name" : "usm",
+                                    "security-level" : [
+                                    {
+                                        "name" : "authentication",
+                                        "read-view" : "NSSVIEW"
+                                    }
+                                    ]
+                                }
+                                ]
+                            }
+                        },
+                        {
+                            "name" : "net2noc",
+                            "default-context-prefix" : {
+                                "security-model" : [
+                                {
+                                    "name" : "usm",
+                                    "security-level" : [
+                                    {
+                                        "name" : "authentication",
+                                        "context-match" : "exact",
+                                        "read-view" : "readview",
+                                        "write-view" : "writeview",
+                                        "notify-view" : "notifyview"
+                                    }
+                                    ]
+                                }
+                                ]
+                            }
+                        }
+                        ]
+                    }
+                }
+            },
+            "view" : [
+            {
+                "name" : "NSSVIEW",
+                "oid" : [
+                {
+                    "name" : "iso",
+                    "include" : [null]
+                },
+                {
+                    "name" : ".1"
+                }
+                ]
+            },
+            {
+                "name" : "all",
+                "oid" : [
+                {
+                    "name" : ".1"
+                }
+                ]
+            },
+            {
+                "name" : "nss",
+                "oid" : [
+                {
+                    "name" : ".1"
+                }
+                ]
+            }
+            ],
+            "community" : [
+            {
+                "name" : "LHCgnmeL88k",
+                "authorization" : "read-only"
+            },
+            {
+                "name" : "juaTa00^ng",
+                "view" : "NSSVIEW",
+                "authorization" : "read-only",
+                "clients" : [
+                {
+                    "name" : "28.119.1.0/24"
+                },
+                {
+                    "name" : "28.119.175.0/24"
+                }
+                ]
+            }
+            ],
+            "trap-options" : {
+                "source-address" : {
+                    "lo0" : [null]
+                }
+            },
+            "trap-group" : [
+            {
+                "name" : "nms-traps",
+                "version" : "v2",
+                "categories" : {
+                    "authentication" : [null],
+                    "chassis" : [null],
+                    "link" : [null],
+                    "startup" : [null],
+                    "vrrp-events" : [null],
+                    "configuration" : [null]
+                },
+                "targets" : [
+                {
+                    "name" : "28.119.175.162"
+                }
+                ]
+            }
+            ]
+        },
+        "forwarding-options" : {
+            "storm-control-profiles" : [
+            {
+                "name" : "default",
+                "all" : {}
+            }
+            ],
+            "hash-key" : {
+                "family" : {
+                    "inet" : {
+                        "layer-3" : {},
+                        "layer-4" : {}
+                    },
+                    "inet6" : {
+                        "layer-3" : {},
+                        "layer-4" : {}
+                    }
+                }
+            }
+        },
+        "policy-options" : {
+            "prefix-list" : [
+            {
+                "name" : "bgp-neighbors",
+                "apply-path" : "protocols bgp group <*> neighbor <*>"
+            },
+            {
+                "name" : "dns-servers",
+                "apply-path" : "system name-server <*>"
+            },
+            {
+                "name" : "lhcone",
+                "prefix-list-item" : [
+                {
+                    "name" : "49.16.44.0/24"
+                },
+                {
+                    "name" : "49.16.45.0/25"
+                },
+                {
+                    "name" : "49.16.45.128/26"
+                },
+                {
+                    "name" : "49.16.45.192/26"
+                }
+                ]
+            },
+            {
+                "name" : "lhcone6",
+                "prefix-list-item" : [
+                {
+                    "name" : "2001:48a8:6a01::/64"
+                },
+                {
+                    "name" : "2001:48a8:6a01:1::/64"
+                }
+                ]
+            },
+            {
+                "name" : "nese",
+                "prefix-list-item" : [
+                {
+                    "name" : "49.16.45.192/26"
+                }
+                ]
+            },
+            {
+                "name" : "nese6",
+                "prefix-list-item" : [
+                {
+                    "name" : "2001:48a8:6a01:1::/64"
+                }
+                ]
+            },
+            {
+                "name" : "ntp-server",
+                "apply-path" : "system ntp server <*>"
+            },
+            {
+                "name" : "rfc1918",
+                "prefix-list-item" : [
+                {
+                    "name" : "30.0.0.0/8"
+                },
+                {
+                    "name" : "72.16.0.0/12"
+                },
+                {
+                    "name" : "92.168.0.0/16"
+                }
+                ]
+            },
+            {
+                "name" : "router-ipv4",
+                "apply-path" : "interfaces <*> unit <*> family inet address <*>"
+            },
+            {
+                "name" : "ssh-allow",
+                "prefix-list-item" : [
+                {
+                    "name" : "30.192.255.0/24"
+                },
+                {
+                    "name" : "49.16.44.0/23"
+                },
+                {
+                    "name" : "28.119.0.0/22"
+                },
+                {
+                    "name" : "28.119.10.2/32"
+                },
+                {
+                    "name" : "28.119.36.0/23"
+                },
+                {
+                    "name" : "28.119.53.96/28"
+                }
+                ]
+            },
+            {
+                "name" : "vrrp",
+                "prefix-list-item" : [
+                {
+                    "name" : "124.0.0.18/32"
+                }
+                ]
+            }
+            ],
+            "policy-statement" : [
+            {
+                "name" : "64520-PeerIn",
+                "term" : [
+                {
+                    "name" : "default_route",
+                    "from" : {
+                        "route-filter" : [
+                        {
+                            "address" : "0.0.0.0/0",
+                            "exact" : [null]
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "ECMP",
+                "then" : {
+                    "load-balance" : {
+                        "per-packet" : [null]
+                    }
+                }
+            },
+            {
+                "name" : "allroutes",
+                "term" : [
+                {
+                    "name" : "all",
+                    "then" : {
+                        "accept" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "default-originate",
+                "term" : [
+                {
+                    "name" : "allow-default",
+                    "from" : {
+                        "route-filter" : [
+                        {
+                            "address" : "0.0.0.0/0",
+                            "exact" : [null]
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "defaultv6-originate",
+                "term" : [
+                {
+                    "name" : "allow-default",
+                    "from" : {
+                        "route-filter" : [
+                        {
+                            "address" : "::0/0",
+                            "exact" : [null]
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "lhcone",
+                "term" : [
+                {
+                    "name" : "allow",
+                    "from" : {
+                        "prefix-list" : [
+                        {
+                            "name" : "lhcone"
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                },
+                {
+                    "name" : "deny",
+                    "then" : {
+                        "reject" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "lhcone-to-mghpcc",
+                "term" : [
+                {
+                    "name" : "allow",
+                    "from" : {
+                        "prefix-list" : [
+                        {
+                            "name" : "lhcone"
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "next-hop" : {
+                            "self" : [null]
+                        },
+                        "accept" : [null]
+                    }
+                },
+                {
+                    "name" : "deny",
+                    "then" : {
+                        "reject" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "lhcone6",
+                "term" : [
+                {
+                    "name" : "allow",
+                    "from" : {
+                        "prefix-list" : [
+                        {
+                            "name" : "lhcone6"
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "next-hop" : {
+                            "self" : [null]
+                        },
+                        "accept" : [null]
+                    }
+                },
+                {
+                    "name" : "deny",
+                    "then" : {
+                        "reject" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "nese",
+                "term" : [
+                {
+                    "name" : "allow",
+                    "from" : {
+                        "prefix-list" : [
+                        {
+                            "name" : "nese"
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                },
+                {
+                    "name" : "deny",
+                    "then" : {
+                        "reject" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "nese-atlas-import",
+                "term" : [
+                {
+                    "name" : "accept_prefix",
+                    "from" : {
+                        "route-filter" : [
+                        {
+                            "address" : "149.16.45.0/26",
+                            "exact" : [null]
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "nese6",
+                "term" : [
+                {
+                    "name" : "allow",
+                    "from" : {
+                        "prefix-list" : [
+                        {
+                            "name" : "nese6"
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "accept" : [null]
+                    }
+                },
+                {
+                    "name" : "deny",
+                    "then" : {
+                        "reject" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "next-hop-self",
+                "term" : [
+                {
+                    "name" : "next-hop-self",
+                    "from" : {
+                        "route-filter" : [
+                        {
+                            "address" : "0.0.0.0/0",
+                            "exact" : [null]
+                        }
+                        ]
+                    },
+                    "then" : {
+                        "next-hop" : {
+                            "self" : [null]
+                        },
+                        "accept" : [null]
+                    }
+                }
+                ]
+            },
+            {
+                "name" : "noRFC1918",
+                "from" : {
+                    "prefix-list" : [
+                    {
+                        "name" : "rfc1918"
+                    }
+                    ]
+                },
+                "then" : {
+                    "reject" : [null]
+                }
+            },
+            {
+                "name" : "reject-the-rest",
+                "then" : {
+                    "reject" : [null]
+                }
+            }
+            ]
+        },
+        "firewall" : {
+            "family" : {
+                "inet" : {
+                    "filter" : [
+                    {
+                        "name" : "control-plane-filter",
+                        "interface-specific" : [null],
+                        "term" : [
+                        {
+                            "name" : "accept-bgp",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "bgp-neighbors"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["tcp"],
+                                "destination-port" : ["bgp"]
+                            },
+                            "then" : {
+                                "count" : "accept-bgp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-vrrp",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "vrrp"
+                                }
+                                ],
+                                "protocol" : ["vrrp"]
+                            },
+                            "then" : {
+                                "count" : "accept-vrrp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-bfd",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "source-port" : ["49152-65535"],
+                                "destination-port" : ["3784-3785", "4784-4785"]
+                            },
+                            "then" : {
+                                "count" : "accept-bfd",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "no-icmp-fragments",
+                            "from" : {
+                                "is-fragment" : [null],
+                                "protocol" : ["icmp"]
+                            },
+                            "then" : {
+                                "count" : "no-icmp-fragments",
+                                "log" : [null],
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "accept-icmp",
+                            "from" : {
+                                "protocol" : ["icmp"],
+                                "ttl-except" : ["1"],
+                                "icmp-type" : ["echo-reply", "echo-request", "time-exceeded", "unreachable", "source-quench", "router-advertisement", "parameter-problem"]
+                            },
+                            "then" : {
+                                "policer" : "management-5m",
+                                "count" : "accept-icmp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-traceroute-udp",
+                            "from" : {
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "ttl" : ["1"],
+                                "destination-port" : ["33435-33450"]
+                            },
+                            "then" : {
+                                "policer" : "management-1m",
+                                "count" : "accept-traceroute-udp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-traceroute-icmp",
+                            "from" : {
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["icmp"],
+                                "ttl" : ["1"],
+                                "icmp-type" : ["echo-request", "timestamp", "time-exceeded"]
+                            },
+                            "then" : {
+                                "policer" : "management-1m",
+                                "count" : "accept-traceroute-icmp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-traceroute-tcp",
+                            "from" : {
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["tcp"],
+                                "ttl" : ["1"]
+                            },
+                            "then" : {
+                                "policer" : "management-1m",
+                                "count" : "accept-traceroute-tcp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-ssh",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "ssh-allow"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["tcp"],
+                                "destination-port" : ["ssh"]
+                            },
+                            "then" : {
+                                "count" : "accept-ssh",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-snmp",
+                            "from" : {
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "destination-port" : ["snmp"]
+                            },
+                            "then" : {
+                                "policer" : "management-5m",
+                                "count" : "accept-snmp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-ntp",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "ntp-server"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "source-port" : ["ntp"]
+                            },
+                            "then" : {
+                                "policer" : "management-1m",
+                                "count" : "accept-ntp",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-ntp-self",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "destination-port" : ["ntp"]
+                            },
+                            "then" : {
+                                "policer" : "management-1m",
+                                "count" : "accept-ntp-self",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-dns",
+                            "from" : {
+                                "source-prefix-list" : [
+                                {
+                                    "name" : "dns-servers"
+                                }
+                                ],
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "source-port" : ["53"]
+                            },
+                            "then" : {
+                                "policer" : "management-1m",
+                                "count" : "accept-dns",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-established-tcp-ssh",
+                            "then" : {
+                                "count" : "accept-established-tcp-ssh",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "accept-established-udp-ephemeral",
+                            "from" : {
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["udp"],
+                                "destination-port" : ["49152-65535"]
+                            },
+                            "then" : {
+                                "policer" : "management-5m",
+                                "count" : "accept-established-udp-ephemeral",
+                                "accept" : [null]
+                            }
+                        },
+                        {
+                            "name" : "discard-TTL_1-unknown",
+                            "from" : {
+                                "ttl" : ["1"]
+                            },
+                            "then" : {
+                                "count" : "discard-all-TTL_1-unknown",
+                                "log" : [null],
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "discard-smb",
+                            "from" : {
+                                "protocol" : ["tcp"],
+                                "destination-port" : ["445"]
+                            },
+                            "then" : {
+                                "count" : "discard-smb",
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "discard-tcp-netbios",
+                            "from" : {
+                                "protocol" : ["tcp"],
+                                "destination-port" : ["135"]
+                            },
+                            "then" : {
+                                "count" : "discard-tcp-netbios",
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "discard-sqlserver",
+                            "from" : {
+                                "protocol" : ["tcp"],
+                                "destination-port" : ["1433"]
+                            },
+                            "then" : {
+                                "count" : "discard-sqlserver",
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "discard-netbios",
+                            "from" : {
+                                "protocol" : ["udp"],
+                                "destination-port" : ["137"]
+                            },
+                            "then" : {
+                                "count" : "discard-netbios",
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "discard-ssh-highports",
+                            "from" : {
+                                "destination-prefix-list" : [
+                                {
+                                    "name" : "router-ipv4"
+                                }
+                                ],
+                                "protocol" : ["tcp"],
+                                "destination-port" : ["1024-65500"]
+                            },
+                            "then" : {
+                                "count" : "ssh-highports",
+                                "log" : [null],
+                                "discard" : {}
+                            }
+                        },
+                        {
+                            "name" : "discard-unknown",
+                            "then" : {
+                                "count" : "discard-unknown",
+                                "log" : [null],
+                                "discard" : {}
+                            }
+                        }
+                        ]
+                    }
+                    ]
+                }
+            },
+            "policer" : [
+            {
+                "name" : "management-1m",
+                "if-exceeding" : {
+                    "bandwidth-limit" : "1m",
+                    "burst-size-limit" : "625k"
+                },
+                "then" : {
+                    "discard" : [null]
+                }
+            },
+            {
+                "name" : "management-5m",
+                "if-exceeding" : {
+                    "bandwidth-limit" : "5m",
+                    "burst-size-limit" : "625k"
+                },
+                "then" : {
+                    "discard" : [null]
+                }
+            }
+            ]
+        },
+        "routing-options" : {
+            "static" : {
+                "route" : [
+                {
+                    "name" : "0.0.0.0/0",
+                    "next-hop" : ["105.172.168.76"]
+                }
+                ]
+            }
+        },
+        "protocols" : {
+            "iccp" : {
+                "local-ip-addr" : "105.172.168.79",
+                "peer" : [
+                {
+                    "name" : "105.172.168.78",
+                    "redundancy-group-id-list" : [1],
+                    "backup-liveness-detection" : {
+                        "backup-peer-ip" : "105.172.168.78"
+                    },
+                    "liveness-detection" : {
+                        "minimum-interval" : 300,
+                        "multiplier" : 3
+                    },
+                    "authentication-key" : "$9$CIrFuORrlMaaaaaaJGq.n/CuORleM8XaaaaaikPfzFreK"
+                }
+                ]
+            },
+            "bgp" : {
+                "local-as" : {
+                    "as-number" : "64522"
+                }
+            },
+            "lldp" : {
+                "interface" : [
+                {
+                    "name" : "all"
+                }
+                ]
+            }
+        },
+        "switch-options" : {
+            "service-id" : 1
+        },
+        "vlans" : {
+            "vlan" : [
+            {
+                "name" : "mc-lag-vrrp-ae11",
+                "description" : "mc-lag-vrrp-ae11",
+                "vlan-id" : 3045
+            },
+            {
+                "name" : "mghpcc-atlas-mgmt-1",
+                "description" : "mghpcc-atlas-mgmt-1",
+                "vlan-id" : 58,
+                "l3-interface" : "irb.58"
+            },
+            {
+                "name" : "net2-test",
+                "description" : "net2-test",
+                "vlan-id" : 3038
+            }
+            ]
+        }
+    }
+}

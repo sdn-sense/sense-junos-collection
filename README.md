@@ -1,1 +1,3 @@
-# sense-junos-collection
+# Ansible Collection - sense.junos
+
+Documentation for the collection.

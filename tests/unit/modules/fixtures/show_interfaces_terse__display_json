@@ -1,0 +1,2545 @@
+{
+    "interface-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/23.4R1.10-EVO/junos-interface",
+                        "junos:style" : "terse"
+                       },
+        "physical-interface" : [
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/0.16386"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/2"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/2.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "aenet"
+                    }
+                    ],
+                    "ae-bundle-name" : [
+                    {
+                        "data" : "ae1.0"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/4"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/4.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/5"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/5.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/6"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/6.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/7"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/7.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/8"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/8.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/9"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/9.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/10"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/10.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/11"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/11.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/12"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/12.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/13"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/13.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/14"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/14.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/15"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/15.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/16"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/16.3045"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "205.172.168.79/31",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/16.32767"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/17"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/17.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/18"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/18.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/19"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/19.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/20"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/20.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/21"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/21.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/22"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/22.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/23"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/23.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/24"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/24.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/25"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/25.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/26"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/26.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/27"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/27.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/28"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/28.3040"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "205.172.168.77/31",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet6"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "2001:48e8:6400:4::2/64",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    },
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "fe80::3e08:cd0b:e08b:4e18/64",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/28.32767"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/30"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/30.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/31"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/31.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/32"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/32.1138"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "198.124.194.45/31",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet6"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "2001:400:6003:9::3/127",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    },
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "fe80::3e08:cd04:728b:4e38/64",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/32.3022"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "198.124.81.83/31",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet6"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "2001:400:f002:e8::3/127",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    },
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "fe80::3e08:cd0b:ce8b:4e38/64",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/32.32767"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/33"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/33.16386"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/34"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/34.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "ethernet-switching"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "et-0/0/35"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "et-0/0/35.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "re0:mgmt-0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "ae1"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "ae1.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "ethernet-switching"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "demux0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "esi"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti1"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti2"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti3"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti4"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti5"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti6"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "fti7"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "irb"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "irb.58"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "max-local-cache" : [
+                    {
+                        "data" : "100000"
+                    }
+                    ],
+                    "new-hold-limit" : [
+                    {
+                        "data" : "100000"
+                    }
+                    ],
+                    "intf-curr-cnt" : [
+                    {
+                        "data" : "2"
+                    }
+                    ],
+                    "intf-unresolved-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-hold-nh-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "172.20.170.4/23",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "irb.3038"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "max-local-cache" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "new-hold-limit" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-curr-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-unresolved-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-hold-nh-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "172.20.177.3/24",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "multiservice"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "lo0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "lo0.0"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet"
+                    }
+                    ],
+                    "max-local-cache" : [
+                    {
+                        "data" : "100000"
+                    }
+                    ],
+                    "new-hold-limit" : [
+                    {
+                        "data" : "100000"
+                    }
+                    ],
+                    "intf-curr-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-unresolved-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-hold-nh-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "205.172.168.253"
+                        }
+                        ],
+                        "ifa-destination" : [
+                        {
+                            "data" : "0/0",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                },
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "inet6"
+                    }
+                    ],
+                    "max-local-cache" : [
+                    {
+                        "data" : "100000"
+                    }
+                    ],
+                    "new-hold-limit" : [
+                    {
+                        "data" : "100000"
+                    }
+                    ],
+                    "intf-curr-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-unresolved-cnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "intf-hold-nh-dropcnt" : [
+                    {
+                        "data" : "0"
+                    }
+                    ],
+                    "interface-address" : [
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "2001:48e8:6400:3::1/64",
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    },
+                    {
+                        "ifa-local" : [
+                        {
+                            "data" : "fe80::3e08:cdf0:8b:4d37"
+                        }
+                        ],
+                        "ifa-destination" : [
+                        {
+                            "data" : [null],
+                            "attributes" : {"junos:emit" : "emit"}
+                        }
+                        ]
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "lsi"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "pip0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "pp0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "vtep"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "up"
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "software-information" : [
+    {
+        "host-name" : [
+        {
+            "data" : "atlas-rt-1-2"
+        }
+        ],
+        "product-model" : [
+        {
+            "data" : "ACX7100-32C"
+        }
+        ],
+        "product-name" : [
+        {
+            "data" : "acx7100-32c"
+        }
+        ],
+        "junos-version" : [
+        {
+            "data" : "23.4R1.10-EVO"
+        }
+        ],
+        "yocto-version" : [
+        {
+            "data" : "3.0.2"
+        }
+        ],
+        "kernel-version" : [
+        {
+            "data" : "5.2.60-yocto-standard-ge8e43b6"
+        }
+        ],
+        "package-information" : [
+        {
+            "name" : [
+            {
+                "data" : "junos-evo-install-acx-f-x86-64-23.4R1.10-EVO"
+            }
+            ],
+            "comment" : [
+            {
+                "data" : "JUNOS-EVO OS 64-bit [junos-evo-install-acx-f-x86-64-23.4R1.10-EVO]"
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}

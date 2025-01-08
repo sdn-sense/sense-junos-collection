@@ -1,0 +1,15 @@
+namespace: sense
+name: junos
+version: 1.0.0
+readme: README.md
+authors:
+- Justas Balcas <juztas@gmail.com>
+description: Ansible Network Collections for Juniper Junos
+license_file: LICENCE
+tags: [Juniper, Junos, networking]
+dependencies:
+  ansible.netcommon: '>=1.0.0'
+repository: https://github.com/sdn-sense/sense-junos-collection
+documentation: https://github.com/sdn-sense/sense-junos-collection
+homepage: https://github.com/sdn-sense/sense-junos-collection
+issues: https://github.com/sdn-sense/sense-junos-collection

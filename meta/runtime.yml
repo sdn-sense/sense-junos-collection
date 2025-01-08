@@ -1,0 +1,9 @@
+plugin_routing:
+  action:
+    junos_config:
+      redirect: sense.junos.junos
+    junos_command:
+      redirect: sense.junos.junos
+    junos_facts:
+      redirect: sense.junos.junos
+
