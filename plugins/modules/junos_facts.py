@@ -46,40 +46,133 @@ class Default(FactsBase):
 
     def populate(self):
         super(Default, self).populate()
-        # TODO Parsing (see fixtures)
         self.facts["default"] = self.responses[0]
-
-
-@classwrapper
-class Config(FactsBase):
-    """Default Class to get basic info"""
-
-    COMMANDS = [
-        "show running-config | json",
-    ]
-
-    def populate(self):
-        super(Config, self).populate()
-        self.facts["config"] = self.responses[0]
-
 
 @classwrapper
 class Interfaces(FactsBase):
     """All Interfaces Class"""
 
     COMMANDS = [
-        "show interfaces brief | display json",
-        "show vlans | display json",
-        "show interfaces terse | display json",
+        'show interfaces | display json',
+        "show vlan detail | display json",
         "show lldp neighbors | display json",
+        "show interfaces ae* | display json"
     ]
 
     def populate(self):
         super(Interfaces, self).populate()
-        self.facts["interfaces"] = self.responses[0]
-        self.facts["vlans"] = self.responses[1]
-        self.facts["ipaddresses"] = self.responses[2]
-        self.facts["lldp"] = self.responses[3]
+        self.facts.setdefault("info", {"macs": []})
+        self.facts.setdefault("interfaces", {})
+        self.parse_interfaces(self.responses[0])
+        self.parse_vlans(self.responses[1])
+        self.parse_lldp(self.responses[2])
+        self.parse_port_channels(self.responses[3])
+
+    def parse_interfaces(self, cmdoutput):
+        """Parse Junos Output Interfaces"""
+        for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
+            intf = physdata.get("name", [{"": ""}])[0].get("data", "")
+            if intf:
+                newEntry = self.facts["interfaces"].setdefault(intf, {})
+                self._getOperStatus(newEntry, physdata)
+                self._getlineprotocol(newEntry, physdata)
+                self._getMTU(newEntry, physdata)
+                self._getSpeed(newEntry, physdata)
+                self._getMacAddress(newEntry, physdata)
+
+    def _addMac(self, macaddr):
+        """Add Mac Address"""
+        if macaddr not in self.facts["info"]["macs"]:
+            self.facts["info"]["macs"].append(macaddr)
+
+    def _getOperStatus(self, newEntry, physdata):
+        """Get Operational Status"""
+        operstatus = physdata.get("oper-status", [{"": ""}])[0].get("data", "unknown")
+        newEntry["operstatus"] = operstatus
+
+    def _getlineprotocol(self, newEntry, physdata):
+        """Get Line Protocol"""
+        adminstatus = physdata.get("admin-status", [{"": ""}])[0].get("data", "unknown")
+        newEntry["lineprotocol"] = adminstatus
+
+    def _getMTU(self, newEntry, physdata):
+        """Get MTU"""
+        mtu = physdata.get("mtu", [{"": ""}])[0].get("data", 1500)
+        newEntry["mtu"] = mtu
+
+
+    def _getSpeed(self, newEntry, physdata):
+        """Get Speed"""
+        speed = physdata.get("speed", [{"": ""}])[0].get("data", 0)
+        if "Gbps" in speed:
+            speed = int(speed.split("Gbps")[0]) * 1000
+        elif "Mbps" in speed:
+            speed = int(speed.split("Mbps")[0])
+        elif "Kbps" in speed:
+            speed = int(speed.split("Kbps")[0]) / 1000
+        newEntry["speed"] = speed
+
+    def _getMacAddress(self, newEntry, physdata):
+        """Get Mac Address"""
+        # current-physical-address and hardware-physical-address
+        for key in ["current-physical-address", "hardware-physical-address"]:
+            mac = physdata.get(key, [{"": ""}])[0].get("data", "")
+            if mac:
+                self._addMac(mac)
+                newEntry["mac"] = mac
+
+    def parse_port_channels(self, cmdoutput):
+        """Parse Port Channels"""
+        # show interfaces ae* | display json
+        for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
+            intf = physdata.get("name", [{"": ""}])[0].get("data", "")
+            if intf.startswith("ae"):
+                newEntry = self.facts["interfaces"].setdefault(intf, {})
+                self._getOperStatus(newEntry, physdata)
+                self._getlineprotocol(newEntry, physdata)
+                self._getMTU(newEntry, physdata)
+                self._getSpeed(newEntry, physdata)
+                self._getMacAddress(newEntry, physdata)
+
+
+    def parse_taggness(self, inputval):
+        """Parse if it is tagged or not"""
+        # l2ng-l2rtb-vlan-member-interface
+        # l2ng-l2rtb-vlan-member-tagness
+        taginft = inputval.get("l2ng-l2rtb-vlan-member-interface", [{"": ""}])[0].get("data", "")
+        taginft = taginft.replace("*", "")
+        tagtype = inputval.get("l2ng-l2rtb-vlan-member-tagness", [{"": ""}])[0].get("data", "")
+        return tagtype, taginft
+
+    def parse_vlans(self, cmdoutput):
+        """Parse Vlans"""
+        # show vlan detail | display json
+        #         for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
+        for vlan in cmdoutput.get("l2ng-l2ald-vlan-instance-information", [{"": ""}])[0].get("l2ng-l2ald-vlan-instance-group", []):
+            vlanid = vlan.get("l2ng-l2rtb-vlan-tag", [{"": ""}])[0].get("data", "")
+            if vlanid:
+                newEntry = self.facts["interfaces"].setdefault(f"Vlan{vlanid}", {})
+                newEntry["mtu"] = 1500 # Need a way to loop all interfaces self.facts["interfaces"][intf].get("mtu", 1500)
+                # Get tagged vlan members l2ng-l2rtb-vlan-member
+                for vlanmember in vlan.get("l2ng-l2rtb-vlan-member", []):
+                    tagtype, taginft = self.parse_taggness(vlanmember)
+                    newEntry.setdefault(tagtype, {})
+                    if taginft not in newEntry[tagtype]:
+                        newEntry[tagtype].append(taginft)
+
+    def parse_lldp(self, cmdoutput):
+        """Parse LLDP"""
+        for lldpdata in cmdoutput["lldp-neighbors-information"]:
+            intf = lldpdata.get("lldp-local-port-id", [{"": ""}])[0].get("data", "")
+            if intf:
+                entryOut = {'local_port_id': intf}
+                for key, mapping in {'lldp-remote-system-name': 'remote_system_name',
+                                     'lldp-remote-chassis-id': 'remote_chassis_id',
+                                     'lldp-remote-port-id': 'remote_port_id'}.items():
+                    tmpVal = lldpdata.get(key, [{"": ""}])[0].get("data", "")
+                    if tmpVal:
+                        entryOut[mapping] = tmpVal
+                self.facts["lldp"][intf] = lldpdata
 
 
 @classwrapper
@@ -97,7 +190,6 @@ FACT_SUBSETS = {
     "default": Default,
     "interfaces": Interfaces,
     "routing": Routing,
-    "config": Config,
 }
 
 VALID_SUBSETS = frozenset(FACT_SUBSETS.keys())
@@ -106,7 +198,7 @@ VALID_SUBSETS = frozenset(FACT_SUBSETS.keys())
 @functionwrapper
 def main():
     """main entry point for module execution"""
-    argument_spec = {"gather_subset": {"default": ["!config"], "type": "list"}}
+    argument_spec = {"gather_subset": {"default": ["!default"], "type": "list"}}
     argument_spec.update(junos_argument_spec)
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
     gather_subset = module.params["gather_subset"]
