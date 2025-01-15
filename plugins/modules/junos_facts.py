@@ -142,7 +142,7 @@ class Interfaces(FactsBase):
 
     def _getLagMembers(self, newEntry, physdata):
         """Get LAG Members"""
-        for lagmember in physdata.get("lag-traffic-statistics", [{"": ""}])[0].get("ifd-lag-members-list", []):
+        for lagmember in physdata.get("ifd-lag-traffic-statistics", [{"": ""}])[0].get("ifd-lag-members-list", []):
             intf = lagmember.get("name", [{"": ""}])[0].get("data", "")
             if intf:
                 newEntry.setdefault("channel-member", [])
