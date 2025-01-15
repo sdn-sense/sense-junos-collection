@@ -207,9 +207,9 @@ class Routing(FactsBase):
                 rval["via"] = routeEntry.get("rt-entry", [{"": ""}])[0].get("nh", [{"": ""}])[0].get("via", [{"": ""}])[0].get("data", "")
                 if rval["to"] or rval["via"]:
                     if ":" in rval["from"]:
-                        self.facts["ipv6"].append(routeEntry)
+                        self.facts["ipv6"].append(rval)
                     else:
-                        self.facts["ipv4"].append(routeEntry)
+                        self.facts["ipv4"].append(rval)
 
 FACT_SUBSETS = {
     "default": Default,
