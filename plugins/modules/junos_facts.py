@@ -9,7 +9,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six import iteritems
 from ansible.utils.display import Display
 from ansible_collections.sense.junos.plugins.module_utils.network.junos import (
-    check_args, junos_argument_spec, run_commands)
+    check_args, junos_argument_spec, run_commands, IgnoreInterface)
 from ansible_collections.sense.junos.plugins.module_utils.runwrapper import (
     classwrapper, functionwrapper)
 
@@ -72,13 +72,16 @@ class Interfaces(FactsBase):
         for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
             intf = physdata.get("name", [{"": ""}])[0].get("data", "")
             if intf:
-                newEntry = self.facts["interfaces"].setdefault(intf, {})
-                self._getOperStatus(newEntry, physdata)
-                self._getlineprotocol(newEntry, physdata)
-                self._getMTU(newEntry, physdata)
-                self._getSpeed(newEntry, physdata)
-                self._getMacAddress(newEntry, physdata)
-                self._getSwitchport(newEntry, physdata)
+                try:
+                    newEntry = self.facts["interfaces"].setdefault(intf, {})
+                    self._getOperStatus(newEntry, physdata)
+                    self._getlineprotocol(newEntry, physdata)
+                    self._getMTU(newEntry, physdata)
+                    self._getSpeed(newEntry, physdata)
+                    self._getMacAddress(newEntry, physdata)
+                    self._getSwitchport(newEntry, physdata)
+                except IgnoreInterface:
+                    del self.facts["interfaces"][intf]
 
     def _addMac(self, macaddr):
         """Add Mac Address"""
@@ -105,6 +108,8 @@ class Interfaces(FactsBase):
     def _getMTU(self, newEntry, physdata):
         """Get MTU"""
         mtu = physdata.get("mtu", [{"": ""}])[0].get("data", 1500)
+        if mtu == 'Unlimited':
+            raise IgnoreInterface("Unlimited MTU")
         newEntry["mtu"] = mtu
 
 
@@ -120,6 +125,10 @@ class Interfaces(FactsBase):
             speed = int(speed.split("Mbps")[0])
         elif "Kbps" in speed:
             speed = int(speed.split("Kbps")[0]) / 1000
+        elif speed == "Unlimited":
+            raise IgnoreInterface("Unlimited speed")
+        elif speed == "Unspecified":
+            speed = 10000 # Default to 10Gbps
         newEntry["speed"] = speed
 
     def _getMacAddress(self, newEntry, physdata):
@@ -137,20 +146,21 @@ class Interfaces(FactsBase):
         for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
             intf = physdata.get("name", [{"": ""}])[0].get("data", "")
             if intf.startswith("ae"):
-                newEntry = self.facts["interfaces"].setdefault(intf, {})
-                self._getOperStatus(newEntry, physdata)
-                self._getlineprotocol(newEntry, physdata)
-                self._getMTU(newEntry, physdata)
-                self._getSpeed(newEntry, physdata)
-                self._getMacAddress(newEntry, physdata)
+                try:
+                    newEntry = self.facts["interfaces"].setdefault(intf, {})
+                    self._getOperStatus(newEntry, physdata)
+                    self._getlineprotocol(newEntry, physdata)
+                    self._getMTU(newEntry, physdata)
+                    self._getSpeed(newEntry, physdata)
+                    self._getMacAddress(newEntry, physdata)
+                except IgnoreInterface:
+                    del self.facts["interfaces"][intf]
 
 
     def parse_taggness(self, inputval):
         """Parse if it is tagged or not"""
-        # l2ng-l2rtb-vlan-member-interface
-        # l2ng-l2rtb-vlan-member-tagness
         taginft = inputval.get("l2ng-l2rtb-vlan-member-interface", [{"": ""}])[0].get("data", "")
-        taginft = taginft.replace("*", "")
+        taginft = taginft.replace("*", "").split(".")[0]
         tagtype = inputval.get("l2ng-l2rtb-vlan-member-tagness", [{"": ""}])[0].get("data", "")
         return tagtype, taginft
 

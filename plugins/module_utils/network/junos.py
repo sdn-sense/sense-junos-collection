@@ -147,3 +147,13 @@ def get_sublevel_config(running_config, module):
     sublevel_config = "\n".join(current_config_contents)
 
     return sublevel_config
+
+class ExceptionTemplate(Exception):
+    """Exception template."""
+    def __call__(self, *args):
+        return self.__class__(*(self.args + args))
+    def __str__(self):
+        return ': '.join(self.args)
+
+class IgnoreInterface(ExceptionTemplate):
+    """Not Found error."""
