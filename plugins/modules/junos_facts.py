@@ -54,11 +54,10 @@ class Interfaces(FactsBase):
 
     COMMANDS = [
         'show interfaces | display json',
-        "show vlan detail | display json",
+        "show vlans detail | display json",
         "show lldp neighbors | display json",
         "show interfaces ae* | display json"
     ]
-
     def populate(self):
         super(Interfaces, self).populate()
         self.facts.setdefault("info", {"macs": []})
@@ -79,11 +78,19 @@ class Interfaces(FactsBase):
                 self._getMTU(newEntry, physdata)
                 self._getSpeed(newEntry, physdata)
                 self._getMacAddress(newEntry, physdata)
+                self._getSwitchport(newEntry, physdata)
 
     def _addMac(self, macaddr):
         """Add Mac Address"""
         if macaddr not in self.facts["info"]["macs"]:
             self.facts["info"]["macs"].append(macaddr)
+
+    def _getSwitchport(self, newEntry, physdata):
+        """Get Switchport"""
+        if "switch-options" in physdata:
+            newEntry["switchport"] = True
+        else:
+            newEntry["switchport"] = True # For now we report that all are switchports (TODO - Review in future)
 
     def _getOperStatus(self, newEntry, physdata):
         """Get Operational Status"""
@@ -103,7 +110,10 @@ class Interfaces(FactsBase):
 
     def _getSpeed(self, newEntry, physdata):
         """Get Speed"""
-        speed = physdata.get("speed", [{"": ""}])[0].get("data", 0)
+        speed = physdata.get("speed", [{"": ""}])[0].get("data", "")
+        if not speed:
+            newEntry["speed"] = 0
+            return
         if "Gbps" in speed:
             speed = int(speed.split("Gbps")[0]) * 1000
         elif "Mbps" in speed:
@@ -146,8 +156,6 @@ class Interfaces(FactsBase):
 
     def parse_vlans(self, cmdoutput):
         """Parse Vlans"""
-        # show vlan detail | display json
-        #         for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
         for vlan in cmdoutput.get("l2ng-l2ald-vlan-instance-information", [{"": ""}])[0].get("l2ng-l2ald-vlan-instance-group", []):
             vlanid = vlan.get("l2ng-l2rtb-vlan-tag", [{"": ""}])[0].get("data", "")
             if vlanid:
@@ -156,7 +164,7 @@ class Interfaces(FactsBase):
                 # Get tagged vlan members l2ng-l2rtb-vlan-member
                 for vlanmember in vlan.get("l2ng-l2rtb-vlan-member", []):
                     tagtype, taginft = self.parse_taggness(vlanmember)
-                    newEntry.setdefault(tagtype, {})
+                    newEntry.setdefault(tagtype, [])
                     if taginft not in newEntry[tagtype]:
                         newEntry[tagtype].append(taginft)
 
@@ -183,8 +191,25 @@ class Routing(FactsBase):
 
     def populate(self):
         super(Routing, self).populate()
-        self.facts["routes"] = self.responses[0]
+        self.facts["ipv6"] = []
+        self.facts["ipv4"] = []
+        self.getRouting(self.responses[0])
 
+    def getRouting(self, cmdoutput):
+        """Get Routing Information"""
+        for route in cmdoutput.get("route-information", [{"": ""}])[0].get("route-table", []):
+            for routeEntry in route.get("rt", []):
+                rval = {}
+                rval["from"] = routeEntry.get("rt-destination", [{"": ""}])[0].get("data", "")
+                if not rval["from"]:
+                    continue
+                rval["to"] = routeEntry.get("rt-entry", [{"": ""}])[0].get("nh", [{"": ""}])[0].get("to", [{"": ""}])[0].get("data", "")
+                rval["via"] = routeEntry.get("rt-entry", [{"": ""}])[0].get("nh", [{"": ""}])[0].get("via", [{"": ""}])[0].get("data", "")
+                if rval["to"] or rval["via"]:
+                    if ":" in rval["from"]:
+                        self.facts["ipv6"].append(routeEntry)
+                    else:
+                        self.facts["ipv4"].append(routeEntry)
 
 FACT_SUBSETS = {
     "default": Default,
