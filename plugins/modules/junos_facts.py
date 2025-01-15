@@ -142,11 +142,12 @@ class Interfaces(FactsBase):
 
     def _getLagMembers(self, newEntry, physdata):
         """Get LAG Members"""
-        # ifd-lag-traffic-statistics  ifd-lag-members-list
-        for lagmember in physdata.get("ifd-lag-members-list", [{"": ""}])[0].get("ifd-lag-members-list", []):
-            newEntry.setdefault("channel-member", [])
-            intfname = lagmember.get("name", [{"": ""}])[0].get("data", "")
-            newEntry["channel-member"].append(intfname)
+        for lagmember in physdata.get("lag-traffic-statistics", [{"": ""}])[0].get("ifd-lag-members-list", []):
+            intf = lagmember.get("name", [{"": ""}])[0].get("data", "")
+            if intf:
+                newEntry.setdefault("channel-member", [])
+                newEntry["channel-member"].append(intf)
+
 
     def parse_port_channels(self, cmdoutput):
         """Parse Port Channels"""
