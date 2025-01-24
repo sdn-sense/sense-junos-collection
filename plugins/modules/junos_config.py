@@ -17,7 +17,6 @@ DOCUMENTATION = ""
 EXAMPLES = ""
 RETURN = ""
 from ansible.module_utils.basic import AnsibleModule
-from ansible.utils.display import Display
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.config import (
     NetworkConfig, dumps)
 from ansible_collections.sense.junos.plugins.module_utils.network.junos import (
@@ -25,7 +24,6 @@ from ansible_collections.sense.junos.plugins.module_utils.network.junos import (
 from ansible_collections.sense.junos.plugins.module_utils.runwrapper import \
     functionwrapper
 
-display = Display()
 
 
 @functionwrapper
@@ -34,7 +32,7 @@ def get_candidate(module):
     if module.params["src"]:
         candidate.load(module.params["src"])
     elif module.params["lines"]:
-        parents = module.params["parents"] or list()
+        parents = module.params["parents"] or []
         commands = module.params["lines"][0]
         if (isinstance(commands, dict)) and (isinstance(commands["command"], list)):
             candidate.add(commands["command"], parents=parents)
@@ -137,16 +135,10 @@ def main():
     if module.params["save"]:
         result["changed"] = True
         if not module.check_mode:
-            cmd = {
-                "command": "copy running-config startup-config",
-                "prompt": r"\[confirm yes/no\]:\s?$",
-                "answer": "yes",
-            }
-            run_commands(module, [cmd])
             result["saved"] = True
         else:
             module.warn(
-                "Skipping command `copy running-config startup-config`"
+                "Skipping command `commit and-quit`"
                 "due to check_mode.  Configuration not copied to "
                 "non-volatile storage"
             )

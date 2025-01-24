@@ -5,6 +5,7 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 import json
 
+from ansible.utils.display import Display
 from ansible.module_utils._text import to_text
 from ansible.module_utils.basic import env_fallback
 from ansible.module_utils.connection import exec_command
@@ -14,6 +15,8 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.u
     ComplexList, to_list)
 from ansible_collections.sense.junos.plugins.module_utils.runwrapper import \
     functionwrapper
+
+display = Display()
 
 _DEVICE_CONFIGS = {}
 
@@ -49,8 +52,12 @@ junos_argument_spec = {"provider": {"type": "dict", "options": junos_provider_sp
 def to_json(out):
     """Check and change output to dict if possible"""
     try:
-        return json.loads(out)
-    except ValueError:
+        #Junos might return double dicts and this will fail to load.
+        parts = out.split("\n\n")
+        return json.loads(parts[0])
+    except ValueError as ex:
+        display.vvv(f'Received non-json output: {out}')
+        display.vvv(f'Error: {ex}')
         return out
 
 
@@ -107,7 +114,7 @@ def run_commands(module, commands, check_rc=True):
 @functionwrapper
 def load_config(module, commands):
     """Load config"""
-    ret, _out, err = exec_command(module, "configure terminal")
+    ret, _out, err = exec_command(module, "configure")
     if ret != 0:
         module.fail_json(
             msg="unable to enter configuration mode",
@@ -115,16 +122,15 @@ def load_config(module, commands):
         )
 
     for command in to_list(commands):
-        if command == "end":
+        if command == "commit and-quit":
             continue
         ret, _out, err = exec_command(module, command)
         if ret != 0:
             module.fail_json(
                 msg=to_text(err, errors="surrogate_or_strict"), command=command, rc=ret
             )
-
-    exec_command(module, "end")
-
+    if not module.check_mode:
+        exec_command(module, "commit and-quit")
 
 @functionwrapper
 def get_sublevel_config(running_config, module):
