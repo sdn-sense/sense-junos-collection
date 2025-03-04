@@ -42,11 +42,25 @@ class Default(FactsBase):
 
     COMMANDS = [
         "show version | display json",
+        "show ethernet-switching table detail | display json"
     ]
 
     def populate(self):
         super(Default, self).populate()
         self.facts["default"] = self.responses[0]
+        self.facts["mactable"] = self.parse_mac_table(self.responses[1])
+
+    def parse_mac_table(self, cmdoutput):
+        """Parse Mac Table"""
+        out = {}
+        for macdata in cmdoutput.get("l2ng-l2ald-rtb-macdb", [{"": ""}])[0].get("l2ng-l2ald-mac-entry-vlan", []):
+            mac = macdata.get("l2ng-l2-mac-address", [{"": ""}])[0].get("data", "")
+            vlanid = macdata.get("l2ng-l2-vlan-id", [{"": ""}])[0].get("data", "")
+            if mac and vlanid:
+                out.setdefault(vlanid, [])
+                if mac not in out[vlanid]:
+                    out[vlanid].append(mac)
+        return out
 
 @classwrapper
 class Interfaces(FactsBase):
