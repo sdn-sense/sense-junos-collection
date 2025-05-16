@@ -114,7 +114,7 @@ def run_commands(module, commands, check_rc=True):
 @functionwrapper
 def load_config(module, commands):
     """Load config"""
-    ret, _out, err = exec_command(module, "configure")
+    ret, _out, err = exec_command(module, "configure private")
     if ret != 0:
         module.fail_json(
             msg="unable to enter configuration mode",
