@@ -56,8 +56,6 @@ def to_json(out):
         parts = out.split("\n\n")
         return json.loads(parts[0])
     except ValueError as ex:
-        display.vvv(f'Received non-json output: {out}')
-        display.vvv(f'Error: {ex}')
         return out
 
 
@@ -110,6 +108,15 @@ def run_commands(module, commands, check_rc=True):
         responses.append(to_json(to_text(out, errors="surrogate_or_strict")))
     return responses
 
+@functionwrapper
+def check_commit(module, ret, out, err):
+    """Check if commit was successful"""
+    if 'error: ' in out or 'error: ' in err:
+        errmsg = f"Initial commit failed. RET: {str(ret)} OUT: {str(out)} ERR: {str(err)}"
+        ret, out, err = exec_command(module, "rollback 0")
+        errmsg += f"\n Rollback: {str(ret)} OUT: {str(out)} ERR: {str(err)}"
+        module.fail_json(msg=to_text(errmsg, errors="surrogate_or_strict"), rc=100)
+
 
 @functionwrapper
 def load_config(module, commands):
@@ -130,7 +137,8 @@ def load_config(module, commands):
                 msg=to_text(err, errors="surrogate_or_strict"), command=command, rc=ret
             )
     if not module.check_mode:
-        exec_command(module, "commit and-quit")
+        ret, out, err = exec_command(module, "commit and-quit")
+        check_commit(module, ret, out, err)
 
 @functionwrapper
 def get_sublevel_config(running_config, module):
