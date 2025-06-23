@@ -104,10 +104,18 @@ class Interfaces(FactsBase):
 
     def _getSwitchport(self, newEntry, physdata):
         """Get Switchport"""
-        if "switch-options" in physdata:
-            newEntry["switchport"] = True
-        else:
-            newEntry["switchport"] = True # For now we report that all are switchports (TODO - Review in future)
+        # logical-interface
+        switchPort = False
+        for item in physdata.get("logical-interface", [{"": ""}]):
+            if 'address-family' in item:
+                for addritem in item['address-family']:
+                    if 'address-family-name' in addritem:
+                        for addritemname in addritem['address-family-name']:
+                            if addritemname.get('data') == 'ethernet-switching':
+                                switchPort = True
+        port = physdata.get("name", [{"": ""}])[0].get("data", "")
+        display.vvv(f"Here is identified SwitchPort: {switchPort} {port}")
+        newEntry["switchport"] = switchPort
 
     def _getOperStatus(self, newEntry, physdata):
         """Get Operational Status"""
