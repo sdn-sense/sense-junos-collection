@@ -1,19 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import re
 # Copyright: Contributors to the Ansible project
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 import traceback
+import xml.etree.ElementTree as ET
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six import iteritems
 from ansible.utils.display import Display
 from ansible_collections.sense.junos.plugins.module_utils.network.junos import (
-    check_args, junos_argument_spec, run_commands, IgnoreInterface)
+    IgnoreInterface, check_args, junos_argument_spec, run_commands)
 from ansible_collections.sense.junos.plugins.module_utils.runwrapper import (
     classwrapper, functionwrapper)
 
 display = Display()
+
+
+def strip_ns(tag):
+    """Remove namespace from XML tag"""
+    return re.sub(r"\{.*\}", "", tag)
 
 
 @classwrapper
@@ -42,8 +49,9 @@ class Default(FactsBase):
 
     COMMANDS = [
         "show version | display json",
-        "show ethernet-switching table detail | display json"
+        "show ethernet-switching table detail | display json",
     ]
+    # Takes ~12 seconds # TODO
 
     def populate(self):
         super(Default, self).populate()
@@ -53,7 +61,9 @@ class Default(FactsBase):
     def parse_mac_table(self, cmdoutput):
         """Parse Mac Table"""
         out = {}
-        for macdata in cmdoutput.get("l2ng-l2ald-rtb-macdb", [{"": ""}])[0].get("l2ng-l2ald-mac-entry-vlan", []):
+        for macdata in cmdoutput.get("l2ng-l2ald-rtb-macdb", [{"": ""}])[0].get(
+            "l2ng-l2ald-mac-entry-vlan", []
+        ):
             mac = macdata.get("l2ng-l2-mac-address", [{"": ""}])[0].get("data", "")
             vlanid = macdata.get("l2ng-l2-vlan-id", [{"": ""}])[0].get("data", "")
             if mac and vlanid:
@@ -62,16 +72,18 @@ class Default(FactsBase):
                     out[vlanid].append(mac)
         return out
 
+
 @classwrapper
 class Interfaces(FactsBase):
     """All Interfaces Class"""
 
     COMMANDS = [
-        'show interfaces | display json',
+        "show interfaces | display json",
         "show vlans detail | display json",
         "show lldp neighbors | display json",
-        "show interfaces ae* | display json"
+        "show interfaces ae* | display json",
     ]
+
     def populate(self):
         super(Interfaces, self).populate()
         self.facts.setdefault("info", {"macs": []})
@@ -83,7 +95,9 @@ class Interfaces(FactsBase):
 
     def parse_interfaces(self, cmdoutput):
         """Parse Junos Output Interfaces"""
-        for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
+        for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get(
+            "physical-interface", []
+        ):
             intf = physdata.get("name", [{"": ""}])[0].get("data", "")
             if intf:
                 try:
@@ -107,14 +121,13 @@ class Interfaces(FactsBase):
         # logical-interface
         switchPort = False
         for item in physdata.get("logical-interface", [{"": ""}]):
-            if 'address-family' in item:
-                for addritem in item['address-family']:
-                    if 'address-family-name' in addritem:
-                        for addritemname in addritem['address-family-name']:
-                            if addritemname.get('data') == 'ethernet-switching':
+            if "address-family" in item:
+                for addritem in item["address-family"]:
+                    if "address-family-name" in addritem:
+                        for addritemname in addritem["address-family-name"]:
+                            if addritemname.get("data") == "ethernet-switching":
                                 switchPort = True
         port = physdata.get("name", [{"": ""}])[0].get("data", "")
-        display.vvv(f"Here is identified SwitchPort: {switchPort} {port}")
         newEntry["switchport"] = switchPort
 
     def _getOperStatus(self, newEntry, physdata):
@@ -130,10 +143,9 @@ class Interfaces(FactsBase):
     def _getMTU(self, newEntry, physdata):
         """Get MTU"""
         mtu = physdata.get("mtu", [{"": ""}])[0].get("data", 1500)
-        if mtu == 'Unlimited':
+        if mtu == "Unlimited":
             raise IgnoreInterface("Unlimited MTU")
         newEntry["mtu"] = mtu
-
 
     def _getSpeed(self, newEntry, physdata):
         """Get Speed"""
@@ -150,7 +162,7 @@ class Interfaces(FactsBase):
         elif speed == "Unlimited":
             raise IgnoreInterface("Unlimited speed")
         elif speed == "Unspecified":
-            speed = 10000 # Default to 10Gbps
+            speed = 10000  # Default to 10Gbps
         newEntry["speed"] = speed
 
     def _getMacAddress(self, newEntry, physdata):
@@ -164,17 +176,20 @@ class Interfaces(FactsBase):
 
     def _getLagMembers(self, newEntry, physdata):
         """Get LAG Members"""
-        for lagmember in physdata.get("ifd-lag-traffic-statistics", [{"": ""}])[0].get("ifd-lag-members-list", []):
+        for lagmember in physdata.get("ifd-lag-traffic-statistics", [{"": ""}])[0].get(
+            "ifd-lag-members-list", []
+        ):
             intf = lagmember.get("name", [{"": ""}])[0].get("data", "")
             if intf:
                 newEntry.setdefault("channel-member", [])
                 newEntry["channel-member"].append(intf)
 
-
     def parse_port_channels(self, cmdoutput):
         """Parse Port Channels"""
         # show interfaces ae* | display json
-        for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get("physical-interface", []):
+        for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get(
+            "physical-interface", []
+        ):
             intf = physdata.get("name", [{"": ""}])[0].get("data", "")
             if intf.startswith("ae"):
                 try:
@@ -188,21 +203,28 @@ class Interfaces(FactsBase):
                 except IgnoreInterface:
                     del self.facts["interfaces"][intf]
 
-
     def parse_taggness(self, inputval):
         """Parse if it is tagged or not"""
-        taginft = inputval.get("l2ng-l2rtb-vlan-member-interface", [{"": ""}])[0].get("data", "")
+        taginft = inputval.get("l2ng-l2rtb-vlan-member-interface", [{"": ""}])[0].get(
+            "data", ""
+        )
         taginft = taginft.replace("*", "").split(".")[0]
-        tagtype = inputval.get("l2ng-l2rtb-vlan-member-tagness", [{"": ""}])[0].get("data", "")
+        tagtype = inputval.get("l2ng-l2rtb-vlan-member-tagness", [{"": ""}])[0].get(
+            "data", ""
+        )
         return tagtype, taginft
 
     def parse_vlans(self, cmdoutput):
         """Parse Vlans"""
-        for vlan in cmdoutput.get("l2ng-l2ald-vlan-instance-information", [{"": ""}])[0].get("l2ng-l2ald-vlan-instance-group", []):
+        for vlan in cmdoutput.get("l2ng-l2ald-vlan-instance-information", [{"": ""}])[
+            0
+        ].get("l2ng-l2ald-vlan-instance-group", []):
             vlanid = vlan.get("l2ng-l2rtb-vlan-tag", [{"": ""}])[0].get("data", "")
             if vlanid:
                 newEntry = self.facts["interfaces"].setdefault(f"Vlan{vlanid}", {})
-                newEntry["mtu"] = 1500 # Need a way to loop all interfaces self.facts["interfaces"][intf].get("mtu", 1500)
+                newEntry["mtu"] = (
+                    1500  # Need a way to loop all interfaces self.facts["interfaces"][intf].get("mtu", 1500)
+                )
                 # Get tagged vlan members l2ng-l2rtb-vlan-member
                 for vlanmember in vlan.get("l2ng-l2rtb-vlan-member", []):
                     tagtype, taginft = self.parse_taggness(vlanmember)
@@ -215,10 +237,12 @@ class Interfaces(FactsBase):
         for lldpdata in cmdoutput["lldp-neighbors-information"]:
             intf = lldpdata.get("lldp-local-port-id", [{"": ""}])[0].get("data", "")
             if intf:
-                entryOut = {'local_port_id': intf}
-                for key, mapping in {'lldp-remote-system-name': 'remote_system_name',
-                                     'lldp-remote-chassis-id': 'remote_chassis_id',
-                                     'lldp-remote-port-id': 'remote_port_id'}.items():
+                entryOut = {"local_port_id": intf}
+                for key, mapping in {
+                    "lldp-remote-system-name": "remote_system_name",
+                    "lldp-remote-chassis-id": "remote_chassis_id",
+                    "lldp-remote-port-id": "remote_port_id",
+                }.items():
                     tmpVal = lldpdata.get(key, [{"": ""}])[0].get("data", "")
                     if tmpVal:
                         entryOut[mapping] = tmpVal
@@ -229,7 +253,7 @@ class Interfaces(FactsBase):
 class Routing(FactsBase):
     """Routing Information Class"""
 
-    COMMANDS = ["show route all | display json"]
+    COMMANDS = ["show route all | display xml"]
 
     def populate(self):
         super(Routing, self).populate()
@@ -238,20 +262,47 @@ class Routing(FactsBase):
         self.getRouting(self.responses[0])
 
     def getRouting(self, cmdoutput):
-        """Get Routing Information"""
-        for route in cmdoutput.get("route-information", [{"": ""}])[0].get("route-table", []):
-            for routeEntry in route.get("rt", []):
-                rval = {}
-                rval["from"] = routeEntry.get("rt-destination", [{"": ""}])[0].get("data", "")
-                if not rval["from"]:
+        """Parse Routing Information from XML ignoring namespaces"""
+        root = ET.fromstring(cmdoutput)
+        for route_table in root.iter():
+            if strip_ns(route_table.tag) != "route-table":
+                continue
+            for rt in route_table:
+                if strip_ns(rt.tag) != "rt":
                     continue
-                rval["to"] = routeEntry.get("rt-entry", [{"": ""}])[0].get("nh", [{"": ""}])[0].get("to", [{"": ""}])[0].get("data", "")
-                rval["via"] = routeEntry.get("rt-entry", [{"": ""}])[0].get("nh", [{"": ""}])[0].get("via", [{"": ""}])[0].get("data", "")
-                if rval["to"] or rval["via"]:
-                    if ":" in rval["from"]:
-                        self.facts["ipv6"].append(rval)
+                rval_base = {}
+                # Get destination
+                for child in rt:
+                    if strip_ns(child.tag) == "rt-destination":
+                        rval_base["from"] = child.text or ""
+                        break
+                if not rval_base.get("from"):
+                    continue
+                for rt_entry in rt:
+                    if strip_ns(rt_entry.tag) != "rt-entry":
+                        continue
+                    nh = None
+                    for entry_child in rt_entry:
+                        if strip_ns(entry_child.tag) == "nh":
+                            nh = entry_child
+                            break
+                    rval = rval_base.copy()
+                    if nh is not None:
+                        for nh_child in nh:
+                            tag = strip_ns(nh_child.tag)
+                            if tag == "to":
+                                rval["to"] = nh_child.text or ""
+                            elif tag == "via":
+                                rval["via"] = nh_child.text or ""
                     else:
-                        self.facts["ipv4"].append(rval)
+                        rval["to"] = ""
+                        rval["via"] = ""
+                    if rval.get("to") or rval.get("via"):
+                        if ":" in rval["from"]:
+                            self.facts["ipv6"].append(rval)
+                        else:
+                            self.facts["ipv4"].append(rval)
+
 
 FACT_SUBSETS = {
     "default": Default,
