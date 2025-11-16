@@ -77,7 +77,10 @@ class Default(FactsBase):
     def populate(self):
         super(Default, self).populate()
         self.facts["default"] = self.responses[0]
-        self.facts["mactable"] = self.parse_mac_table(self.responses[1])
+        try:
+            self.facts["mactable"] = self.parse_mac_table(self.responses[1])
+        except Exception:
+            self.facts["mactable"] = {}
 
     def parse_mac_table(self, cmdoutput):
         """Parse Mac Table"""
