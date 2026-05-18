@@ -101,6 +101,10 @@ class Default(FactsBase):
 class Interfaces(FactsBase):
     """All Interfaces Class"""
 
+    # Note: COMMANDS is rebuilt in populate() based on vlanmode/routing_instance
+    # module params, so the VLAN-listing command points at either the global
+    # `show vlans` (standard) or a routing-instance scope (MX bridge-domains /
+    # PTX vlans). The slot order is fixed so downstream parsing indices stay valid.
     COMMANDS = [
         "show interfaces | display json",
         "show vlans detail | display json",
@@ -108,12 +112,35 @@ class Interfaces(FactsBase):
         "show interfaces ae* | display json",
     ]
 
+    VLAN_COMMANDS = {
+        "standard": "show vlans detail | display json",
+        "mx": "show bridge-domain instance {ri} detail | display json",
+        "ptx": "show vlans instance {ri} detail | display json",
+    }
+
     def populate(self):
+        vlanmode = (self.module.params.get("vlanmode") or "standard").lower()
+        ri_name = self.module.params.get("routing_instance") or "AutoGOLE-Vlans"
+        if vlanmode not in self.VLAN_COMMANDS:
+            vlanmode = "standard"
+        # Substitute routing-instance into the VLAN-listing slot (index 1).
+        vlan_cmd = self.VLAN_COMMANDS[vlanmode].format(ri=ri_name)
+        self.COMMANDS = [
+            "show interfaces | display json",
+            vlan_cmd,
+            "show lldp neighbors | display json",
+            "show interfaces ae* | display json",
+        ]
         super(Interfaces, self).populate()
         self.facts.setdefault("info", {"macs": []})
         self.facts.setdefault("interfaces", {})
         self.parse_interfaces(self.responses[0])
-        self.parse_vlans(self.responses[1])
+        if vlanmode == "mx":
+            self.parse_bridge_domains_mx(self.responses[1])
+        elif vlanmode == "ptx":
+            self.parse_routing_instance_vlans(self.responses[1])
+        else:
+            self.parse_vlans(self.responses[1])
         self.parse_lldp(self.responses[2])
         self.parse_port_channels(self.responses[3])
 
@@ -256,6 +283,76 @@ class Interfaces(FactsBase):
                     if taginft not in newEntry[tagtype]:
                         newEntry[tagtype].append(taginft)
 
+    def parse_routing_instance_vlans(self, cmdoutput):
+        """Parse VLANs scoped to a routing-instance virtual-switch (PTX).
+
+        `show vlans instance <ri> detail | display json` mirrors the global
+        `show vlans detail` JSON shape, just filtered to the instance. The
+        configured VLAN name (e.g. VLAN-1323) is exposed as
+        l2ng-l2rtb-vlan-name; we fall back to f"VLAN-{vlanid}" if absent.
+        """
+        for vlan in cmdoutput.get("l2ng-l2ald-vlan-instance-information", [{"": ""}])[
+            0
+        ].get("l2ng-l2ald-vlan-instance-group", []):
+            vlanid = vlan.get("l2ng-l2rtb-vlan-tag", [{"": ""}])[0].get("data", "")
+            if not vlanid:
+                continue
+            vlan_name = vlan.get("l2ng-l2rtb-vlan-name", [{"": ""}])[0].get(
+                "data", ""
+            ) or f"VLAN-{vlanid}"
+            newEntry = self.facts["interfaces"].setdefault(vlan_name, {})
+            newEntry["mtu"] = 1500
+            for vlanmember in vlan.get("l2ng-l2rtb-vlan-member", []):
+                tagtype, taginft = self.parse_taggness(vlanmember)
+                newEntry.setdefault(tagtype, [])
+                if taginft not in newEntry[tagtype]:
+                    newEntry[tagtype].append(taginft)
+
+    def parse_bridge_domains_mx(self, cmdoutput):
+        """Parse Bridge Domains for MX routing-instance virtual-switch.
+
+        Output of `show bridge-domain instance <ri> detail | display json`:
+          {
+            "bridge-domain-information": [{
+              "bridge-domain": [{
+                "bridge-domain-name": [{"data": "VLAN-1323"}],
+                "bridge-vlan-id":     [{"data": "1323"}],
+                "bridge-interface":   [{"data": "ae14.1323"}, {"data": "ae4.1323"}]
+              }, ...]
+            }]
+          }
+        Member interfaces appear as `<port>.<vlan>` sub-units; we strip the
+        sub-unit suffix and record the parent port as a tagged member, matching
+        the shape used by parse_vlans() for consistent downstream comparison.
+        """
+        for bd in (
+            cmdoutput.get("bridge-domain-information", [{"": ""}])[0]
+            .get("bridge-domain", [])
+        ):
+            bd_name = bd.get("bridge-domain-name", [{"": ""}])[0].get("data", "")
+            vlanid = bd.get("bridge-vlan-id", [{"": ""}])[0].get("data", "")
+            if not bd_name and vlanid:
+                bd_name = f"VLAN-{vlanid}"
+            if not bd_name:
+                continue
+            newEntry = self.facts["interfaces"].setdefault(bd_name, {})
+            newEntry["mtu"] = 1500
+            # bridge-interface may be a list of {"data": "ae14.1323"} entries,
+            # or a single comma-separated string under "data". Handle both.
+            raw_members = []
+            for entry in bd.get("bridge-interface", []):
+                val = entry.get("data", "") if isinstance(entry, dict) else ""
+                if not val:
+                    continue
+                raw_members.extend(part.strip() for part in val.split(",") if part.strip())
+            for member in raw_members:
+                parent = member.replace("*", "").split(".")[0]
+                if not parent:
+                    continue
+                newEntry.setdefault("tagged", [])
+                if parent not in newEntry["tagged"]:
+                    newEntry["tagged"].append(parent)
+
     def parse_lldp(self, cmdoutput):
         """Parse LLDP"""
         for lldpdata in cmdoutput["lldp-neighbors-information"]:
@@ -340,7 +437,16 @@ VALID_SUBSETS = frozenset(FACT_SUBSETS.keys())
 @functionwrapper
 def main():
     """main entry point for module execution"""
-    argument_spec = {"gather_subset": {"default": ["!default"], "type": "list"}}
+    argument_spec = {
+        "gather_subset": {"default": ["!default"], "type": "list"},
+        # vlanmode selects how VLANs are discovered on the device:
+        #   standard -> `show vlans detail` (default; EX/QFX/SRX/ELS, standard MX)
+        #   mx       -> `show bridge-domain instance <ri> detail` (MX virtual-switch)
+        #   ptx      -> `show vlans instance <ri> detail`         (PTX virtual-switch)
+        # routing_instance is only consulted when vlanmode is mx or ptx.
+        "vlanmode": {"type": "str", "default": "standard", "choices": ["standard", "mx", "ptx"]},
+        "routing_instance": {"type": "str", "default": "AutoGOLE-Vlans"},
+    }
     argument_spec.update(junos_argument_spec)
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
     gather_subset = module.params["gather_subset"]
