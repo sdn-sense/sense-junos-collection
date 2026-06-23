@@ -120,7 +120,7 @@ class Interfaces(FactsBase):
 
     def populate(self):
         vlanmode = (self.module.params.get("vlanmode") or "standard").lower()
-        ri_name = self.module.params.get("routing_instance") or "AutoGOLE-Vlans"
+        ri_name = self.module.params.get("routing_instance") or "SENSE-Vlans"
         if vlanmode not in self.VLAN_COMMANDS:
             vlanmode = "standard"
         # Substitute routing-instance into the VLAN-listing slot (index 1).
@@ -445,7 +445,7 @@ def main():
         #   ptx      -> `show vlans instance <ri> detail`         (PTX virtual-switch)
         # routing_instance is only consulted when vlanmode is mx or ptx.
         "vlanmode": {"type": "str", "default": "standard", "choices": ["standard", "mx", "ptx"]},
-        "routing_instance": {"type": "str", "default": "AutoGOLE-Vlans"},
+        "routing_instance": {"type": "str", "default": "SENSE-Vlans"},
     }
     argument_spec.update(junos_argument_spec)
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
