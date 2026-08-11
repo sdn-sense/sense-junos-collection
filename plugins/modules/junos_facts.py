@@ -79,7 +79,8 @@ class Default(FactsBase):
         self.facts["default"] = self.responses[0]
         try:
             self.facts["mactable"] = self.parse_mac_table(self.responses[1])
-        except Exception:
+        except Exception as ex:
+            display.warning(f"junos_facts: failed to parse_mac_table output: {ex}")
             self.facts["mactable"] = {}
 
     def parse_mac_table(self, cmdoutput):
@@ -114,7 +115,13 @@ class Interfaces(FactsBase):
 
     VLAN_COMMANDS = {
         "standard": "show vlans detail | display json",
-        "mx": "show bridge-domain instance {ri} detail | display json",
+        # "bridge domain" (two words) is the real command on MX -- the
+        # hyphenated "bridge-domain" is a syntax error on Junos 22.2R1-S2.4
+        # (confirmed live against an MX304). Verify against your own MX
+        # release if it differs.
+        "mx": "show bridge domain instance {ri} detail | display json",
+        # NOT verified against real PTX hardware -- confirm this command
+        # exists and returns this shape before relying on ptx mode.
         "ptx": "show vlans instance {ri} detail | display json",
     }
 
@@ -134,15 +141,27 @@ class Interfaces(FactsBase):
         super(Interfaces, self).populate()
         self.facts.setdefault("info", {"macs": []})
         self.facts.setdefault("interfaces", {})
-        self.parse_interfaces(self.responses[0])
+        self.facts.setdefault("lldp", {})
         if vlanmode == "mx":
-            self.parse_bridge_domains_mx(self.responses[1])
+            vlan_parser = self.parse_bridge_domains_mx
         elif vlanmode == "ptx":
-            self.parse_routing_instance_vlans(self.responses[1])
+            vlan_parser = self.parse_routing_instance_vlans
         else:
-            self.parse_vlans(self.responses[1])
-        self.parse_lldp(self.responses[2])
-        self.parse_port_channels(self.responses[3])
+            vlan_parser = self.parse_vlans
+        # Each parser runs independently: a malformed/non-JSON response for
+        # one command (CLI error, empty table, device quirk) must not blank
+        # out fact subsets that parsed successfully, nor crash the whole
+        # facts-gathering run.
+        for name, parsefunc, response in (
+            ("parse_interfaces", self.parse_interfaces, self.responses[0]),
+            ("parse_vlans", vlan_parser, self.responses[1]),
+            ("parse_lldp", self.parse_lldp, self.responses[2]),
+            ("parse_port_channels", self.parse_port_channels, self.responses[3]),
+        ):
+            try:
+                parsefunc(response)
+            except Exception as ex:
+                display.warning(f"junos_facts: failed to {name} output: {ex}")
 
     def parse_interfaces(self, cmdoutput):
         """Parse Junos Output Interfaces"""
@@ -204,16 +223,25 @@ class Interfaces(FactsBase):
         if not speed:
             newEntry["speed"] = 0
             return
-        if "Gbps" in speed:
-            speed = int(speed.split("Gbps")[0]) * 1000
-        elif "Mbps" in speed:
-            speed = int(speed.split("Mbps")[0])
-        elif "Kbps" in speed:
-            speed = int(speed.split("Kbps")[0]) / 1000
-        elif speed == "Unlimited":
+        if speed == "Unlimited":
             raise IgnoreInterface("Unlimited speed")
-        elif speed == "Unspecified":
-            speed = 10000  # Default to 10Gbps
+        if speed == "Unspecified":
+            newEntry["speed"] = 10000  # Default to 10Gbps
+            return
+        # Unit casing is not consistent across platforms/interfaces (e.g. MX
+        # reports some ports as "800mbps" lowercase instead of "800Mbps"),
+        # so match case-insensitively instead of exact substrings.
+        match = re.match(r"^([\d.]+)\s*(gbps|mbps|kbps)$", speed, re.IGNORECASE)
+        if not match:
+            newEntry["speed"] = 0
+            return
+        value, unit = float(match.group(1)), match.group(2).lower()
+        if unit == "gbps":
+            speed = int(value * 1000)
+        elif unit == "mbps":
+            speed = int(value)
+        else:
+            speed = value / 1000
         newEntry["speed"] = speed
 
     def _getMacAddress(self, newEntry, physdata):
@@ -311,51 +339,61 @@ class Interfaces(FactsBase):
     def parse_bridge_domains_mx(self, cmdoutput):
         """Parse Bridge Domains for MX routing-instance virtual-switch.
 
-        Output of `show bridge-domain instance <ri> detail | display json`:
+        Output of `show bridge domain instance <ri> detail | display json`.
+        Confirmed live against an MX304 (Junos 22.2R1-S2.4, network-services
+        enhanced-ip) by committing a throwaway bridge-domain
+        (domain-type bridge, an explicit vlan-id) and capturing the real
+        response, then reverting:
           {
-            "bridge-domain-information": [{
-              "bridge-domain": [{
-                "bridge-domain-name": [{"data": "VLAN-1323"}],
-                "bridge-vlan-id":     [{"data": "1323"}],
-                "bridge-interface":   [{"data": "ae14.1323"}, {"data": "ae4.1323"}]
+            "l2ald-bridge-instance-information": [{
+              "l2ald-bridge-instance-group": [{
+                "l2rtb-name":            [{"data": "default-switch"}],
+                "l2rtb-bridging-domain": [{"data": "VLAN-1323"}],
+                "l2rtb-bridge-vlan":     [{"data": "1323"}],
+                "l2rtb-instance-state":  [{"data": "Active"}],
+                ... (mac-limit/mac-learned/sequence-number counters)
               }, ...]
             }]
           }
-        Member interfaces appear as `<port>.<vlan>` sub-units; we strip the
-        sub-unit suffix and record the parent port as a tagged member, matching
-        the shape used by parse_vlans() for consistent downstream comparison.
+        `show bridge domain instance <fake-ri> detail` returns this same
+        empty-but-valid skeleton for a nonexistent instance name (no syntax
+        error), confirming the "instance <ri>" filter itself is accepted --
+        so this command form should work whether or not <ri> is a real
+        virtual-switch, but the instance-scoped case wasn't observed with an
+        actual virtual-switch routing-instance (device had none configured).
+
+        NOT available here: member interfaces. Even with a real interface
+        attached to the test bridge-domain, this command's output never
+        included an interface list, in either "detail" or "extensive" style
+        -- Junos exposes interface<->bridge-domain binding via a *separate*
+        command, `show bridge domain interface <name> extensive | display
+        json` (top-level key "l2ald-bd-ifbd-information" /
+        "l2ald-bd-ifbd-entry"), which requires the interface to already be
+        known and returned no populated fields for the down/unlinked test
+        port used here. Getting real tagged/untagged membership for MX would
+        mean issuing that command per candidate interface (or finding
+        another way to enumerate members) -- not implemented yet, so "mtu"
+        is set but "tagged"/"untagged" are left absent for vlanmode=mx until
+        this is designed and verified against a device with a live member
+        interface.
         """
-        for bd in (
-            cmdoutput.get("bridge-domain-information", [{"": ""}])[0]
-            .get("bridge-domain", [])
-        ):
-            bd_name = bd.get("bridge-domain-name", [{"": ""}])[0].get("data", "")
-            vlanid = bd.get("bridge-vlan-id", [{"": ""}])[0].get("data", "")
+        for bd in cmdoutput.get("l2ald-bridge-instance-information", [{"": ""}])[
+            0
+        ].get("l2ald-bridge-instance-group", []):
+            bd_name = bd.get("l2rtb-bridging-domain", [{"": ""}])[0].get("data", "")
+            vlanid = bd.get("l2rtb-bridge-vlan", [{"": ""}])[0].get("data", "")
             if not bd_name and vlanid:
                 bd_name = f"VLAN-{vlanid}"
             if not bd_name:
                 continue
             newEntry = self.facts["interfaces"].setdefault(bd_name, {})
             newEntry["mtu"] = 1500
-            # bridge-interface may be a list of {"data": "ae14.1323"} entries,
-            # or a single comma-separated string under "data". Handle both.
-            raw_members = []
-            for entry in bd.get("bridge-interface", []):
-                val = entry.get("data", "") if isinstance(entry, dict) else ""
-                if not val:
-                    continue
-                raw_members.extend(part.strip() for part in val.split(",") if part.strip())
-            for member in raw_members:
-                parent = member.replace("*", "").split(".")[0]
-                if not parent:
-                    continue
-                newEntry.setdefault("tagged", [])
-                if parent not in newEntry["tagged"]:
-                    newEntry["tagged"].append(parent)
 
     def parse_lldp(self, cmdoutput):
         """Parse LLDP"""
-        for lldpdata in cmdoutput["lldp-neighbors-information"]:
+        for lldpdata in cmdoutput.get("lldp-neighbors-information", [{"": ""}])[0].get(
+            "lldp-neighbor-information", []
+        ):
             intf = lldpdata.get("lldp-local-port-id", [{"": ""}])[0].get("data", "")
             if intf:
                 entryOut = {"local_port_id": intf}
@@ -367,7 +405,7 @@ class Interfaces(FactsBase):
                     tmpVal = lldpdata.get(key, [{"": ""}])[0].get("data", "")
                     if tmpVal:
                         entryOut[mapping] = tmpVal
-                self.facts["lldp"][intf] = lldpdata
+                self.facts["lldp"][intf] = entryOut
 
 
 @classwrapper
@@ -380,7 +418,10 @@ class Routing(FactsBase):
         super(Routing, self).populate()
         self.facts["ipv6"] = []
         self.facts["ipv4"] = []
-        self.getRouting(self.responses[0])
+        try:
+            self.getRouting(self.responses[0])
+        except Exception as ex:
+            display.warning(f"junos_facts: failed to parse routing output: {ex}")
 
     def getRouting(self, cmdoutput):
         """Parse Routing Information from XML ignoring namespaces"""

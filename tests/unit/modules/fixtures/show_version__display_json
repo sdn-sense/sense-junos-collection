@@ -3,44 +3,1484 @@
     {
         "host-name" : [
         {
-            "data" : "atlas-rt-1-2"
+            "data" : "mghpcc-rt-dev"
         }
-        ],
+        ], 
         "product-model" : [
         {
-            "data" : "ACX7100-32C"
+            "data" : "mx304"
         }
-        ],
+        ], 
         "product-name" : [
         {
-            "data" : "acx7100-32c"
+            "data" : "mx304"
         }
-        ],
+        ], 
         "junos-version" : [
         {
-            "data" : "23.4R1.10-EVO"
+            "data" : "22.2R1-S2.4"
         }
-        ],
-        "yocto-version" : [
-        {
-            "data" : "3.0.2"
-        }
-        ],
-        "kernel-version" : [
-        {
-            "data" : "5.2.60-yocto-standard-ge8e43b6"
-        }
-        ],
+        ], 
         "package-information" : [
         {
             "name" : [
             {
-                "data" : "junos-evo-install-acx-f-x86-64-23.4R1.10-EVO"
+                "data" : "os-kernel"
             }
-            ],
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-kernel-prd-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
             "comment" : [
             {
-                "data" : "JUNOS-EVO OS 64-bit [junos-evo-install-acx-f-x86-64-23.4R1.10-EVO]"
+                "data" : "JUNOS OS Kernel 64-bit  [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-libs"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-libs-12-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS libs [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-runtime"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-runtime-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS runtime [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "zoneinfo"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-zoneinfo-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS time zone information [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "netstack"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-net-prd-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS network stack and utilities [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-libs"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-libs-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS libs [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-libs-compat32"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-libs-compat32-12-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS libs compat32 [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-compat32"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-compat32-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS 32-bit compatibility [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-libs-compat32"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-libs-compat32-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS libs compat32 [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-runtime"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-runtime-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS runtime [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "vmguest"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-vmguest-mtx-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "Junos vmguest package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "sflow-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "sflow-mx-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS sflow mx [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "py-extensions"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "py-extensions-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS py extensions [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "py-base"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "py-base-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS py base [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-vmguest"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-vmguest-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS vmguest [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-crypto"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-crypto-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS crypto [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "os-boot-junos"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "os-boot-junos-ve-x86-64-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS OS boot-ve files [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "na-telemetry"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "na-telemetry-x86-32-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS na telemetry [22.2R1-S2.4]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-libs-compat32-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-libs-compat32-mx-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mx libs compat32 [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-runtime-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-runtime-mx-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mx runtime [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-rpd-telemetry-application"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-rpd-telemetry-application-x86-64-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS RPD Telemetry Application [22.2R1-S2.4]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-mpls-oam-basic"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-mpls-oam-basic-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing mpls-oam-basic [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-mpls-oam-advanced"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-mpls-oam-advanced-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing mpls-oam-advanced [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-lsys"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-lsys-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing lsys [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-controller-internal"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-controller-internal-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing controller-internal [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-controller-external"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-controller-external-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing controller-external [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-compat32"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-compat32-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing 32-bit Compatible Version [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-routing-aggregated"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-routing-aggregated-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Routing aggregated [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-redis"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-redis-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "Redis [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-probe"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-probe-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS probe utility [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-platform-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS common platform support [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-openconfig"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-openconfig-x86-32-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Openconfig [22.2R1-S2.4]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-net-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-net-mtx-prd-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mtx network modules [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-modules"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-modules-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS modules [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-modules-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-modules-mx-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mx modules [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-libs-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-libs-mx-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mx libs [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-l2-rsi"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-l2-rsi-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS L2 RSI Scripts [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-jsqlsync"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-jsqlsync-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS SQL Sync Daemon [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-dp-crypto-support-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-dp-crypto-support-mtx-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mtx Data Plane Crypto Support [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-daemons"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-daemons-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS daemons [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-daemons-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-daemons-mx-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS mx daemons [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-bbe-up"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-bbe-up-x86-64-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Broadband Edge User Plane Apps [22.2R1-S2.4]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-attestation"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-attestation-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "Junos Remote Attestation package [1.0.0+20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "junos-appidd"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "junos-appidd-mx-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS appidd-mx application-identification daemon [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-urlf"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-urlf-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services URL Filter package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-traffic-dird"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-traffic-dird-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services TLB Service PIC package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-telemetry"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-telemetry-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Telemetry [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-tcp-log"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-tcp-log-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services TCP-LOG [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-ssl"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-ssl-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services SSL [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-softwire"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-softwire-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services SOFTWIRE [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-sfw"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-sfw-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Stateful Firewall [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-rtcom"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-rtcom-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services RTCOM [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-rpm"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-rpm-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services RPM [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-pcef"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-pcef-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services PCEF package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-nat"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-nat-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services NAT [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-mss"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-mss-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Mobile Subscriber Service Container package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-mobile"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-mobile-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services MobileNext Software package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-lrf"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-lrf-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Logging Report Framework package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-llpdf"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-llpdf-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services LL-PDF Container package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-jflow"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-jflow-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Jflow Container package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-jdpi"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-jdpi-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Deep Packet Inspection package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-ipsec"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-ipsec-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services IPSec [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-ids"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-ids-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services IDS [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-idp"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-idp-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS IDP Services [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-hcm"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-hcm-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services HTTP Content Management package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-dnsf"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-dnsf-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services DNS Filter package (i386) [20221001.020745_builder_junos_222_r1_s2] "
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-crypto-base"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-crypto-base-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Crypto [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-cpcd"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-cpcd-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Captive Portal and Content Delivery Container package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-cos"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-cos-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services COS [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-appid"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-appid-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS AppId Services [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-alg"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-alg-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services Application Level Gateways [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jservices-aacl"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jservices-aacl-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Services AACL Container package [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jsdn"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jsdn-x86-32-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS SDN Software Suite [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jsd-jet-1"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jsd-x86-32-22.2R1-S2.4-jet-1"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Extension Toolkit [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jphone-home"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jphone-home-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Phone-home [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jpfe-wrlinux9"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jpfe-wrlinux9-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Packet Forwarding Engine Support (wrlinux9) [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jpfe-platform"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jpfe-X960-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Packet Forwarding Engine Support (MX/EX92XX Common) [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jpfe-common"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jpfe-common-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Packet Forwarding Engine Support (M/T Common) [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jpfe-aft"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jpfe-aft-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Packet Forwarding Engine Support (aft) [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jpfe-X"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jpfe-X-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Packet Forwarding Engine Support (MX Common) [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jmrt-base"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jmrt-base-x86-64-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Juniper Malware Removal Tool (JMRT) [1.0.0+20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jinsight"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jinsight-x86-32-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS J-Insight [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jfirmware"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jfirmware-x86-32-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS jfirmware [20220929.153600_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jdocs"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jdocs-x86-32-20221001.020745_builder_junos_222_r1_s2"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS Online Documentation [20221001.020745_builder_junos_222_r1_s2]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "jail-runtime"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "jail-runtime-x86-32-20220817.0361d5f_builder_stable_12_222"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS jail runtime [20220817.0361d5f_builder_stable_12_222]"
+            }
+            ]
+        }, 
+        {
+            "name" : [
+            {
+                "data" : "dsa"
+            }
+            ], 
+            "package-name" : [
+            {
+                "data" : "dsa-x86-64-22.2R1-S2.4"
+            }
+            ], 
+            "comment" : [
+            {
+                "data" : "JUNOS dsa dsa [22.2R1-S2.4]"
             }
             ]
         }
