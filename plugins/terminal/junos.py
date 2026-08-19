@@ -39,6 +39,7 @@ class TerminalModule(TerminalBase):
         """Execute cmd on open shell"""
         try:
             self._exec_cli_command(b"set cli screen-length 0")
+            self._exec_cli_command(b"set cli screen-width 0")
         except AnsibleConnectionFailure:
             raise AnsibleConnectionFailure(
                 "unable to set terminal parameters"
