@@ -197,6 +197,15 @@ class Interfaces(FactsBase):
                         for addritemname in addritem["address-family-name"]:
                             if addritemname.get("data") == "ethernet-switching":
                                 switchPort = True
+        # On MX/PTX, a port destined for a virtual-switch VLAN service is never
+        # configured with an "ethernet-switching" family (that's EX/QFX-only) --
+        # it's added via `routing-instances ... bridge-domains|vlans` instead.
+        # "Link-level type: Flexible-Ethernet" (confirmed against a real MX/PTX
+        # device) is what actually indicates it's safe to attach logical L2
+        # units to the port, so treat it the same as an existing switchport.
+        link_level_type = physdata.get("link-level-type", [{"": ""}])[0].get("data", "")
+        if link_level_type == "Flexible-Ethernet":
+            switchPort = True
         port = physdata.get("name", [{"": ""}])[0].get("data", "")
         newEntry["switchport"] = switchPort
 
