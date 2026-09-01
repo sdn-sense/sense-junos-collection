@@ -152,6 +152,7 @@ class Interfaces(FactsBase):
         # one command (CLI error, empty table, device quirk) must not blank
         # out fact subsets that parsed successfully, nor crash the whole
         # facts-gathering run.
+        parse_errors = {}
         for name, parsefunc, response in (
             ("parse_interfaces", self.parse_interfaces, self.responses[0]),
             ("parse_vlans", vlan_parser, self.responses[1]),
@@ -161,10 +162,23 @@ class Interfaces(FactsBase):
             try:
                 parsefunc(response)
             except Exception as ex:
+                parse_errors[name] = str(ex)
                 display.warning(f"junos_facts: failed to {name} output: {ex}")
+
+        # `show interfaces | display json` is the critical payload
+        if "parse_interfaces" in parse_errors:
+            raise RuntimeError(
+                "'show interfaces | display json' did not return parseable JSON "
+                f"({parse_errors['parse_interfaces']}); refusing to publish a "
+                "degraded interface fact set"
+            )
 
     def parse_interfaces(self, cmdoutput):
         """Parse Junos Output Interfaces"""
+        if not isinstance(cmdoutput, dict):
+            raise ValueError(
+                f"device did not return parseable JSON (got {type(cmdoutput).__name__})"
+            )
         for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get(
             "physical-interface", []
         ):
@@ -275,6 +289,10 @@ class Interfaces(FactsBase):
     def parse_port_channels(self, cmdoutput):
         """Parse Port Channels"""
         # show interfaces ae* | display json
+        if not isinstance(cmdoutput, dict):
+            raise ValueError(
+                f"device did not return parseable JSON (got {type(cmdoutput).__name__})"
+            )
         for physdata in cmdoutput.get("interface-information", [{"": ""}])[0].get(
             "physical-interface", []
         ):

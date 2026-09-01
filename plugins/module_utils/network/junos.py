@@ -50,13 +50,29 @@ junos_argument_spec = {"provider": {"type": "dict", "options": junos_provider_sp
 
 @functionwrapper
 def to_json(out):
-    """Check and change output to dict if possible"""
-    try:
-        #Junos might return double dicts and this will fail to load.
-        parts = out.split("\n\n")
-        return json.loads(parts[0])
-    except ValueError as ex:
+    """Best-effort convert device output to a dict."""
+    if not isinstance(out, str):
         return out
+    candidates = []
+    # 1. Junos may return two concatenated JSON docs separated by a blank line.
+    candidates.append(out.split("\n\n")[0])
+    # 2. The whole payload as-is.
+    candidates.append(out)
+    # 3. From the first '{' to the last '}' - strips banner/warning lines
+    #    before the document and any trailing prompt/garbage after it.
+    start = out.find("{")
+    end = out.rfind("}")
+    if start != -1 and end > start:
+        candidates.append(out[start : end + 1])
+    for candidate in candidates:
+        candidate = candidate.strip()
+        if not candidate:
+            continue
+        try:
+            return json.loads(candidate)
+        except ValueError:
+            continue
+    return out
 
 
 @functionwrapper
