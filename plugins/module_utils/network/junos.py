@@ -49,6 +49,31 @@ junos_argument_spec = {"provider": {"type": "dict", "options": junos_provider_sp
 
 
 @functionwrapper
+def preview_output(value, limit=4000):
+    """Return a short, log-safe preview of raw device output for diagnostics.
+
+    Used when a `| display json` command comes back as something other than
+    parseable JSON (CLI error, truncation, transport hiccup) so the operator
+    can see *what* the device actually returned instead of just "got str".
+    Large payloads are shown head+tail with the middle elided.
+    """
+    if isinstance(value, (dict, list)):
+        try:
+            text = json.dumps(value, default=str)
+        except (TypeError, ValueError):
+            text = repr(value)
+    elif isinstance(value, bytes):
+        text = value.decode("utf-8", errors="replace")
+    else:
+        text = value if isinstance(value, str) else repr(value)
+    text = text.strip()
+    if len(text) <= limit:
+        return text
+    keep = limit // 2
+    return f"{text[:keep]}\n...[{len(text) - limit} chars omitted]...\n{text[-keep:]}"
+
+
+@functionwrapper
 def to_json(out):
     """Best-effort convert device output to a dict."""
     if not isinstance(out, str):
@@ -117,11 +142,22 @@ def run_commands(module, commands, check_rc=True):
     responses = []
     commands = to_commands(module, to_list(commands))
     for cmd in commands:
+        command_str = cmd["command"] if isinstance(cmd, dict) and "command" in cmd else str(cmd)
         cmd = module.jsonify(cmd)
         ret, out, err = exec_command(module, cmd)
         if check_rc and ret != 0:
             module.fail_json(msg=to_text(err, errors="surrogate_or_strict"), rc=ret)
-        responses.append(to_json(to_text(out, errors="surrogate_or_strict")))
+        rawout = to_text(out, errors="surrogate_or_strict")
+        parsed = to_json(rawout)
+        if isinstance(parsed, str) and "| display json" in command_str:
+            rawerr = to_text(err, errors="surrogate_or_strict")
+            display.warning(
+                f"junos run_commands: {command_str!r} did not return parseable JSON "
+                f"(rc={ret}, {len(rawout)} chars stdout, {len(rawerr)} chars stderr). "
+                f"stdout: {preview_output(rawout)}"
+                + (f" || stderr: {preview_output(rawerr)}" if rawerr.strip() else "")
+            )
+        responses.append(parsed)
     return responses
 
 @functionwrapper

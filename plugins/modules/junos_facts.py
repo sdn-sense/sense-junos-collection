@@ -13,7 +13,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six import iteritems
 from ansible.utils.display import Display
 from ansible_collections.sense.junos.plugins.module_utils.network.junos import (
-    IgnoreInterface, check_args, junos_argument_spec, run_commands)
+    IgnoreInterface, check_args, junos_argument_spec, preview_output, run_commands)
 from ansible_collections.sense.junos.plugins.module_utils.runwrapper import (
     classwrapper, functionwrapper)
 
@@ -31,7 +31,9 @@ def dumpFactsToTmp(ansible_facts):
             return obj.decode('utf-8', errors='replace')
         return str(obj)
 
-    fd, path = tempfile.mkstemp(prefix="ansible_facts_", suffix=".json", dir="/tmp")
+    # No dir= : honour $TMPDIR so a full /tmp can be worked around by ops;
+    # SiteRM removes these files after reading them.
+    fd, path = tempfile.mkstemp(prefix="ansible_facts_", suffix=".json")
     os.close(fd)
 
     with open(path, "w", encoding="utf-8") as f:
@@ -86,13 +88,22 @@ class Default(FactsBase):
             self.COMMANDS.append("show ethernet-switching table detail | display json")
         super(Default, self).populate()
         self.facts["default"] = self.responses[0]
+        if not isinstance(self.responses[0], dict):
+            display.warning(
+                "junos_facts: 'show version | display json' did not return parseable JSON "
+                f"(got {type(self.responses[0]).__name__}). Raw device response: "
+                f"{preview_output(self.responses[0])}"
+            )
         self.facts["mactable"] = {}
         if not want_mactable:
             return
         try:
             self.facts["mactable"] = self.parse_mac_table(self.responses[1])
         except Exception as ex:
-            display.warning(f"junos_facts: failed to parse_mac_table output: {ex}")
+            display.warning(
+                f"junos_facts: failed to parse_mac_table output: {ex}. Raw device response "
+                f"({type(self.responses[1]).__name__}): {preview_output(self.responses[1])}"
+            )
             self.facts["mactable"] = {}
 
     def parse_mac_table(self, cmdoutput):
@@ -165,24 +176,28 @@ class Interfaces(FactsBase):
         # out fact subsets that parsed successfully, nor crash the whole
         # facts-gathering run.
         parse_errors = {}
-        for name, parsefunc, response in (
-            ("parse_interfaces", self.parse_interfaces, self.responses[0]),
-            ("parse_vlans", vlan_parser, self.responses[1]),
-            ("parse_lldp", self.parse_lldp, self.responses[2]),
-            ("parse_port_channels", self.parse_port_channels, self.responses[3]),
+        for name, cmd, parsefunc, response in (
+            ("parse_interfaces", self.COMMANDS[0], self.parse_interfaces, self.responses[0]),
+            ("parse_vlans", self.COMMANDS[1], vlan_parser, self.responses[1]),
+            ("parse_lldp", self.COMMANDS[2], self.parse_lldp, self.responses[2]),
+            ("parse_port_channels", self.COMMANDS[3], self.parse_port_channels, self.responses[3]),
         ):
             try:
                 parsefunc(response)
             except Exception as ex:
                 parse_errors[name] = str(ex)
-                display.warning(f"junos_facts: failed to {name} output: {ex}")
+                display.warning(
+                    f"junos_facts: failed to {name} ({cmd!r}): {ex}. Raw device response "
+                    f"({type(response).__name__}): {preview_output(response)}"
+                )
 
         # `show interfaces | display json` is the critical payload
         if "parse_interfaces" in parse_errors:
             raise RuntimeError(
                 "'show interfaces | display json' did not return parseable JSON "
                 f"({parse_errors['parse_interfaces']}); refusing to publish a "
-                "degraded interface fact set"
+                "degraded interface fact set. Raw device response "
+                f"({type(self.responses[0]).__name__}): {preview_output(self.responses[0])}"
             )
 
     def parse_interfaces(self, cmdoutput):
@@ -460,7 +475,11 @@ class Routing(FactsBase):
         try:
             self.getRouting(self.responses[0])
         except Exception as ex:
-            display.warning(f"junos_facts: failed to parse routing output: {ex}")
+            display.warning(
+                f"junos_facts: failed to parse routing output ({self.COMMANDS[0]!r}): {ex}. "
+                f"Raw device response ({type(self.responses[0]).__name__}): "
+                f"{preview_output(self.responses[0])}"
+            )
 
     def getRouting(self, cmdoutput):
         """Parse Routing Information from XML ignoring namespaces"""
