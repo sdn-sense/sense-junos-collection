@@ -68,6 +68,10 @@ class FactsBase:
 class Default(FactsBase):
     """Default Class to get basic info"""
 
+    # COMMANDS is rebuilt in populate() from vlanmode. `show ethernet-switching
+    # table detail` is a syntax error on PTX (pure router, no ethernet-switching
+    # table) and errors on every poll, so it is dropped for vlanmode=ptx and the
+    # MAC table is simply left empty for that mode.
     COMMANDS = [
         "show version | display json",
         "show ethernet-switching table detail | display json",
@@ -75,8 +79,16 @@ class Default(FactsBase):
     # Takes ~12 seconds # TODO
 
     def populate(self):
+        vlanmode = (self.module.params.get("vlanmode") or "standard").lower()
+        want_mactable = vlanmode != "ptx"
+        self.COMMANDS = ["show version | display json"]
+        if want_mactable:
+            self.COMMANDS.append("show ethernet-switching table detail | display json")
         super(Default, self).populate()
         self.facts["default"] = self.responses[0]
+        self.facts["mactable"] = {}
+        if not want_mactable:
+            return
         try:
             self.facts["mactable"] = self.parse_mac_table(self.responses[1])
         except Exception as ex:
@@ -512,6 +524,8 @@ def main():
         #   mx       -> `show bridge-domain instance <ri> detail` (MX virtual-switch)
         #   ptx      -> `show vlans instance <ri> detail`         (PTX virtual-switch)
         # routing_instance is only consulted when vlanmode is mx or ptx.
+        # vlanmode=ptx also drops `show ethernet-switching table detail` from the
+        # default subset (invalid command on PTX); MAC table is empty in that mode.
         "vlanmode": {"type": "str", "default": "standard", "choices": ["standard", "mx", "ptx"]},
         "routing_instance": {"type": "str", "default": "SENSE-Vlans"},
     }
