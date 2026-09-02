@@ -530,6 +530,9 @@ FACT_SUBSETS = {
     "routing": Routing,
 }
 
+# Fixed execution order, independent of set iteration
+SUBSET_ORDER = ["default", "interfaces", "routing"]
+
 VALID_SUBSETS = frozenset(FACT_SUBSETS.keys())
 
 
@@ -547,6 +550,7 @@ def main():
         # default subset (invalid command on PTX); MAC table is empty in that mode.
         "vlanmode": {"type": "str", "default": "standard", "choices": ["standard", "mx", "ptx"]},
         "routing_instance": {"type": "str", "default": "SENSE-Vlans"},
+        "subset_config": {"type": "dict", "default": {}},
     }
     argument_spec.update(junos_argument_spec)
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
@@ -578,11 +582,24 @@ def main():
     runable_subsets.difference_update(exclude_subsets)
     runable_subsets.add("default")
 
-    facts = {"gather_subset": [runable_subsets]}
+    subset_config = module.params.get("subset_config") or {}
+    unknown = set(subset_config) - VALID_SUBSETS
+    if unknown:
+        module.fail_json(msg=f"subset_config: unknown subset(s) {sorted(unknown)}; valid: {sorted(VALID_SUBSETS)}")
+    for name, enabled in subset_config.items():
+        # tolerate "false"/"no"/0 coming through jinja as strings
+        if module.boolean(enabled):
+            runable_subsets.add(name)
+        else:
+            runable_subsets.discard(name)
 
-    instances = []
-    for key in runable_subsets:
-        instances.append(FACT_SUBSETS[key](module))
+    # Deterministic order (see SUBSET_ORDER); unlisted future subsets go last.
+    ordered_subsets = [s for s in SUBSET_ORDER if s in runable_subsets]
+    ordered_subsets += sorted(runable_subsets.difference(ordered_subsets))
+
+    facts = {"gather_subset": [ordered_subsets]}
+
+    instances = [FACT_SUBSETS[key](module) for key in ordered_subsets]
 
     for inst in instances:
         if inst:
