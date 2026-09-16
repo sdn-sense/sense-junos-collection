@@ -83,13 +83,16 @@ def buildNeighborDetailCommand(vrf, peer):
 
 @functionwrapper
 def parseBgpSummaryJson(rawjson, peers):
-    """Parse 'show bgp summary | display json' output, appending one
-    normalized peer per entry, regardless of address family."""
-    try:
-        data = json.loads(rawjson)
-    except ValueError:
+    """Parse 'show bgp summary | display json' output (run_commands()
+    already parses JSON replies to a dict; a raw string is a fallback)."""
+    if isinstance(rawjson, str):
+        try:
+            rawjson = json.loads(rawjson)
+        except ValueError:
+            return
+    if not isinstance(rawjson, dict):
         return
-    bgpinfo = data.get("bgp-information")
+    bgpinfo = rawjson.get("bgp-information")
     if not bgpinfo:
         return
     for peernode in bgpinfo[0].get("bgp-peer", []):
