@@ -268,22 +268,22 @@ class Interfaces(FactsBase):
         newEntry["mtu"] = mtu
 
     def _getSpeed(self, newEntry, physdata):
-        """Get Speed"""
+        """Get port speed in Mbps, stored as "bandwidth" (the key SiteRM reads for every vendor)."""
         speed = physdata.get("speed", [{"": ""}])[0].get("data", "")
         if not speed:
-            newEntry["speed"] = 0
+            newEntry["bandwidth"] = 0
             return
         if speed == "Unlimited":
             raise IgnoreInterface("Unlimited speed")
         if speed == "Unspecified":
-            newEntry["speed"] = 10000  # Default to 10Gbps
+            newEntry["bandwidth"] = 10000  # Default to 10Gbps
             return
         # Unit casing is not consistent across platforms/interfaces (e.g. MX
         # reports some ports as "800mbps" lowercase instead of "800Mbps"),
         # so match case-insensitively instead of exact substrings.
         match = re.match(r"^([\d.]+)\s*(gbps|mbps|kbps)$", speed, re.IGNORECASE)
         if not match:
-            newEntry["speed"] = 0
+            newEntry["bandwidth"] = 0
             return
         value, unit = float(match.group(1)), match.group(2).lower()
         if unit == "gbps":
@@ -292,7 +292,7 @@ class Interfaces(FactsBase):
             speed = int(value)
         else:
             speed = value / 1000
-        newEntry["speed"] = speed
+        newEntry["bandwidth"] = speed
 
     def _getMacAddress(self, newEntry, physdata):
         """Get Mac Address"""
